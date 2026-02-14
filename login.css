@@ -1,0 +1,107 @@
+/* ===== FUNDO MODERNO ===== */
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #2a2e43);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== CARD CENTRAL ===== */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background: #1e293b;
+    padding: 40px 35px;
+    border-radius: 15px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-card h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* ===== CAMPOS ===== */
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #273349;
+    color: #fff;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.login-card input:focus {
+    background: #334155;
+    transform: scale(1.03);
+}
+
+/* ===== BOTÕES ===== */
+.btn-login,
+.btn-register {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-login {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.btn-login:hover {
+    background: #2563eb;
+    transform: scale(1.03);
+}
+
+.btn-register {
+    background: #10b981;
+    color: #fff;
+}
+
+.btn-register:hover {
+    background: #059669;
+    transform: scale(1.03);
+}
+
+/* ===== MENSAGEM ===== */
+.msg {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #ffa500;
+}

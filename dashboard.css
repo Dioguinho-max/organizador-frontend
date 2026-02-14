@@ -1,0 +1,166 @@
+/* ===== DASHBOARD STYLE ===== */
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: rgba(30, 41, 59, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+/* ===== INPUT ===== */
+input {
+    width: 70%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #334155;
+    color: white;
+    margin-right: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    background: #475569;
+}
+
+/* ===== BOTÕES ===== */
+button {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.logout-btn {
+    background: #ef4444;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* ===== LISTAS ===== */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #334155;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+li:hover {
+    transform: translateX(5px);
+}
+
+/* ===== BOTÃO CONCLUIR ===== */
+.btn-concluir {
+    background: #10b981;
+}
+
+.btn-concluir:hover {
+    background: #059669;
+}
+
+/* ===== RANKING ===== */
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    background: #1e293b;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.posicao {
+    font-weight: bold;
+    color: #facc15;
+}
+
+.nome {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.pontos {
+    font-weight: bold;
+}
+
+/* ===== TAREFA CONCLUÍDA ===== */
+li.concluida {
+    opacity: 0.6;
+    background: #1e293b;
+    border-left: 5px solid #10b981;
+    transform: scale(0.98);
+}
+
+/* ===== TEXTO CONCLUÍDO ===== */
+li.concluida strong {
+    color: #94a3b8;
+}
+
+li.concluida .descricao {
+    color: #94a3b8;
+}
+
+li.concluida .badge {
+    opacity: 0.7;
+}
+
+/* Badge concluída */
+.badge {
+    background: #10b981;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+}
