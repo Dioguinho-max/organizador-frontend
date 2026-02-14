@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "https://organizador-backend-dqxr.onrender.com";
 
 async function register() {
     const username = document.getElementById("username").value;
