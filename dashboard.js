@@ -152,10 +152,11 @@ async function excluir(id) {
 async function carregarRanking() {
     try {
         const response = await fetch(`${API}/ranking`, {
-    headers: {
-        "Authorization": `Bearer ${token}`
-    }
-});
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
         const ranking = await response.json();
 
         const lista = document.getElementById("listaRanking");
