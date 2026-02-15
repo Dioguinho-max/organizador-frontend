@@ -62,6 +62,19 @@ A aplicação consome uma API REST hospedada no Render.
 
 ---
 
+### 🤖 Integração com Inteligência Artificial
+
+Permite gerar planos de estudo personalizados através da API:
+
+- Seleção de matéria
+- Nível de dificuldade
+- Quantidade de horas por dia
+
+Resultado exibido diretamente na interface.
+
+Controle de limite diário aplicado pelo backend.
+
+---
 ## 🌐 Integração com Backend
 
 A aplicação consome a seguinte API:
