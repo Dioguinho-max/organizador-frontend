@@ -174,6 +174,62 @@ async function carregarRanking() {
 }
 
 // ===============================
+// IA
+// ===============================
+
+document.getElementById("btnIA").addEventListener("click", async () => {
+
+    const materia = prompt("Qual matéria?");
+    const nivel = prompt("Qual nível?");
+    const horas = prompt("Quantas horas por dia?");
+
+    const res = await fetch("https://organizador-backend-dqxr.onrender.com/gerar-plano", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({ materia, nivel, horas })
+    });
+
+    const data = await res.json();
+
+    if (data.erro) {
+        alert(data.erro);
+        return;
+    }
+
+    document.getElementById("resultadoIA").innerText = data.plano;
+});
+
+//===============================
+//HISTORICO IA
+//===============================
+document.getElementById("btnHistorico").addEventListener("click", async () => {
+
+    const res = await fetch("https://organizador-backend-dqxr.onrender.com/historico-ia", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    });
+
+    const dados = await res.json();
+
+    const div = document.getElementById("historicoIA");
+    div.innerHTML = "";
+
+    dados.forEach(item => {
+        div.innerHTML += `
+            <div>
+                <h3>${item.pergunta}</h3>
+                <p>${item.resposta}</p>
+                <hr>
+            </div>
+        `;
+    });
+});
+
+// ===============================
 // LOGOUT
 // ===============================
 function logout() {
