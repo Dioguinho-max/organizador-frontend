@@ -12,15 +12,10 @@ if (!token) {
 // CRIAR TAREFA
 // ===============================
 async function criarTarefa() {
-    const inputNova = document.getElementById("novaTarefa");
-    const inputDescricao = document.getElementById("descricaoTarefa");
-    const inputNota = document.getElementById("notaTarefa");
 
-    if (!inputNova) return;
-
-    const titulo = inputNova.value.trim();
-    const descricao = inputDescricao?.value.trim();
-    const nota = inputNota?.value;
+    const titulo = document.getElementById("novaTarefa").value.trim();
+    const descricao = document.getElementById("descricaoTarefa").value.trim();
+    const nota = document.getElementById("notaTarefa").value;
 
     if (!titulo) {
         alert("Digite uma tarefa!");
@@ -40,11 +35,17 @@ async function criarTarefa() {
         })
     });
 
-    inputNova.value = "";
-    if (inputDescricao) inputDescricao.value = "";
-    if (inputNota) inputNota.value = "";
+    document.getElementById("novaTarefa").value = "";
+    document.getElementById("descricaoTarefa").value = "";
+    document.getElementById("notaTarefa").value = "";
 
     carregarTarefas();
+}
+
+// Botão criar tarefa
+const btnCriar = document.getElementById("btnCriarTarefa");
+if (btnCriar) {
+    btnCriar.addEventListener("click", criarTarefa);
 }
 
 // ===============================
@@ -92,8 +93,6 @@ async function carregarTarefas() {
 }
 
 // ===============================
-// CONCLUIR
-// ===============================
 async function concluir(id) {
     await fetch(`${API}/tarefas/${id}`, {
         method: "PUT",
@@ -107,9 +106,6 @@ async function concluir(id) {
     carregarTarefas();
 }
 
-// ===============================
-// EXCLUIR
-// ===============================
 async function excluir(id) {
     await fetch(`${API}/tarefas/${id}`, {
         method: "DELETE",
@@ -142,7 +138,7 @@ async function carregarRanking() {
 }
 
 // ===============================
-// IA (MODAL SEGURO)
+// IA
 // ===============================
 
 const modalIA = document.getElementById("modalIA");
@@ -155,33 +151,25 @@ const enviarIA = document.getElementById("enviarIA");
 const chatIA = document.getElementById("chatIA");
 const historicoIA = document.getElementById("historicoIA");
 
-if (btnIA && modalIA) {
-    btnIA.onclick = () => modalIA.style.display = "flex";
-}
-
-if (btnHistoricoIA && modalHistoricoIA) {
-    btnHistoricoIA.onclick = () => {
-        modalHistoricoIA.style.display = "flex";
-        carregarHistorico();
-    };
-}
+if (btnIA) btnIA.onclick = () => modalIA.style.display = "flex";
+if (btnHistoricoIA) btnHistoricoIA.onclick = () => {
+    modalHistoricoIA.style.display = "flex";
+    carregarHistorico();
+};
 
 if (fecharIA) fecharIA.onclick = () => modalIA.style.display = "none";
 if (fecharHistoricoIA) fecharHistoricoIA.onclick = () => modalHistoricoIA.style.display = "none";
 
-if (enviarIA && chatIA) {
+if (enviarIA) {
     enviarIA.onclick = async () => {
 
-        const perguntaInput = document.getElementById("perguntaIA");
-        if (!perguntaInput) return;
-
-        const pergunta = perguntaInput.value.trim();
+        const pergunta = document.getElementById("perguntaIA").value.trim();
         if (!pergunta) return;
 
-        perguntaInput.value = "";
+        document.getElementById("perguntaIA").value = "";
 
         chatIA.innerHTML += `<div class="mensagem-user">${pergunta}</div>`;
-        chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
+        chatIA.innerHTML += `<div class="mensagem-ia">IA pensando...</div>`;
 
         const res = await fetch(`${API}/gerar-plano`, {
             method: "POST",
@@ -197,7 +185,6 @@ if (enviarIA && chatIA) {
         });
 
         const data = await res.json();
-        document.getElementById("loadingIA")?.remove();
 
         chatIA.innerHTML += `<div class="mensagem-ia">${data.plano}</div>`;
         chatIA.scrollTop = chatIA.scrollHeight;
@@ -205,7 +192,6 @@ if (enviarIA && chatIA) {
 }
 
 async function carregarHistorico() {
-    if (!historicoIA) return;
 
     historicoIA.innerHTML = "Carregando...";
 
@@ -214,6 +200,7 @@ async function carregarHistorico() {
     });
 
     const dados = await res.json();
+
     historicoIA.innerHTML = "";
 
     dados.forEach(item => {
@@ -226,14 +213,6 @@ async function carregarHistorico() {
 }
 
 // ===============================
-// LOGOUT
-// ===============================
-window.logout = function () {
-    localStorage.removeItem("token");
-    window.location.href = "index.html";
-};
-
-// INICIAR
 carregarTarefas();
 carregarRanking();
 
