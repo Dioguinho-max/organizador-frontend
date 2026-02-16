@@ -178,7 +178,6 @@ async function carregarRanking() {
 // ===============================
 
 const API_URL = "https://organizador-backend-dqxr.onrender.com";
-const token = localStorage.getItem("token");
 
 const modalIA = document.getElementById("modalIA");
 const btnIA = document.getElementById("btnIA");
@@ -238,10 +237,7 @@ enviarIA.onclick = async () => {
 
     perguntaInput.value = "";
 
-    // Mostra pergunta do usuário
     chatIA.innerHTML += `<div class="mensagem-user">${pergunta}</div>`;
-
-    // Loading
     chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
     chatIA.scrollTop = chatIA.scrollHeight;
 
