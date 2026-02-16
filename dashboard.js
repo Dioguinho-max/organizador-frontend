@@ -163,33 +163,69 @@ if (fecharHistoricoIA) fecharHistoricoIA.onclick = () => modalHistoricoIA.style.
 if (enviarIA) {
     enviarIA.onclick = async () => {
 
-        const pergunta = document.getElementById("perguntaIA").value.trim();
-        if (!pergunta) return;
+        const materia = document.getElementById("materiaIA").value.trim();
+        const nivel = document.getElementById("nivelIA").value;
+        const horas = document.getElementById("horasIA").value;
 
-        document.getElementById("perguntaIA").value = "";
+        if (!materia || !nivel || !horas) {
+            alert("Preencha todos os campos!");
+            return;
+        }
 
-        chatIA.innerHTML += `<div class="mensagem-user">${pergunta}</div>`;
-        chatIA.innerHTML += `<div class="mensagem-ia">IA pensando...</div>`;
+        chatIA.innerHTML += `
+            <div class="mensagem-user">
+                📚 ${materia}<br>
+                📊 ${nivel}<br>
+                ⏳ ${horas}h por dia
+            </div>
+        `;
 
-        const res = await fetch(`${API}/gerar-plano`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                materia: pergunta,
-                nivel: "intermediário",
-                horas: 2
-            })
-        });
-
-        const data = await res.json();
-
-        chatIA.innerHTML += `<div class="mensagem-ia">${data.plano}</div>`;
+        chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
         chatIA.scrollTop = chatIA.scrollHeight;
+
+        try {
+            const res = await fetch(`${API}/gerar-plano`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    materia,
+                    nivel,
+                    horas
+                })
+            });
+
+            const data = await res.json();
+
+            document.getElementById("loadingIA")?.remove();
+
+            chatIA.innerHTML += `
+                <div class="mensagem-ia">
+                    ${data.plano}
+                </div>
+            `;
+
+            chatIA.scrollTop = chatIA.scrollHeight;
+
+            // Limpa campos
+            document.getElementById("materiaIA").value = "";
+            document.getElementById("nivelIA").value = "";
+            document.getElementById("horasIA").value = "";
+
+        } catch (erro) {
+            document.getElementById("loadingIA")?.remove();
+            chatIA.innerHTML += `
+                <div class="mensagem-ia">
+                    ❌ Erro ao gerar plano.
+                </div>
+            `;
+            console.error(erro);
+        }
     };
 }
+
 
 async function carregarHistorico() {
 
