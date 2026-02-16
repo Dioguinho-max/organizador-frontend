@@ -8,9 +8,22 @@ if (!token) {
     return;
 }
 
-// ===============================
-// CRIAR TAREFA
-// ===============================
+/* =========================================
+   FORMATADOR PROFISSIONAL DA IA
+========================================= */
+function formatarPlanoIA(texto) {
+    return texto
+        .replace(/### (.*)/g, "<h3>$1</h3>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/---/g, "<hr>")
+        .replace(/\n\n/g, "<br><br>")
+        .replace(/\n/g, "<br>")
+        .replace(/(\d+)\. (.*)/g, "<br><strong>$1.</strong> $2");
+}
+
+/* =========================================
+   CRIAR TAREFA
+========================================= */
 async function criarTarefa() {
 
     const titulo = document.getElementById("novaTarefa").value.trim();
@@ -42,15 +55,12 @@ async function criarTarefa() {
     carregarTarefas();
 }
 
-// Botão criar tarefa
 const btnCriar = document.getElementById("btnCriarTarefa");
-if (btnCriar) {
-    btnCriar.addEventListener("click", criarTarefa);
-}
+if (btnCriar) btnCriar.addEventListener("click", criarTarefa);
 
-// ===============================
-// LISTAR TAREFAS
-// ===============================
+/* =========================================
+   LISTAR TAREFAS
+========================================= */
 async function carregarTarefas() {
 
     const lista = document.getElementById("listaTarefas");
@@ -64,8 +74,8 @@ async function carregarTarefas() {
     lista.innerHTML = "";
 
     tarefas.forEach(t => {
-        const li = document.createElement("li");
 
+        const li = document.createElement("li");
         if (t.concluida) li.classList.add("concluida");
 
         li.innerHTML = `
@@ -92,7 +102,6 @@ async function carregarTarefas() {
     });
 }
 
-// ===============================
 async function concluir(id) {
     await fetch(`${API}/tarefas/${id}`, {
         method: "PUT",
@@ -102,7 +111,6 @@ async function concluir(id) {
         },
         body: JSON.stringify({ concluida: true })
     });
-
     carregarTarefas();
 }
 
@@ -111,13 +119,12 @@ async function excluir(id) {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
     });
-
     carregarTarefas();
 }
 
-// ===============================
-// RANKING
-// ===============================
+/* =========================================
+   RANKING
+========================================= */
 async function carregarRanking() {
 
     const lista = document.getElementById("listaRanking");
@@ -137,9 +144,9 @@ async function carregarRanking() {
     });
 }
 
-// ===============================
-// IA
-// ===============================
+/* =========================================
+   IA
+========================================= */
 
 const modalIA = document.getElementById("modalIA");
 const modalHistoricoIA = document.getElementById("modalHistoricoIA");
@@ -151,81 +158,75 @@ const enviarIA = document.getElementById("enviarIA");
 const chatIA = document.getElementById("chatIA");
 const historicoIA = document.getElementById("historicoIA");
 
-if (btnIA) btnIA.onclick = () => modalIA.style.display = "flex";
-if (btnHistoricoIA) btnHistoricoIA.onclick = () => {
+btnIA && (btnIA.onclick = () => modalIA.style.display = "flex");
+
+btnHistoricoIA && (btnHistoricoIA.onclick = () => {
     modalHistoricoIA.style.display = "flex";
     carregarHistorico();
-};
+});
 
-if (fecharIA) fecharIA.onclick = () => modalIA.style.display = "none";
-if (fecharHistoricoIA) fecharHistoricoIA.onclick = () => modalHistoricoIA.style.display = "none";
+fecharIA && (fecharIA.onclick = () => modalIA.style.display = "none");
+fecharHistoricoIA && (fecharHistoricoIA.onclick = () => modalHistoricoIA.style.display = "none");
 
-if (enviarIA) {
-    enviarIA.onclick = async () => {
+enviarIA && (enviarIA.onclick = async () => {
 
-        const materia = document.getElementById("materiaIA").value.trim();
-        const nivel = document.getElementById("nivelIA").value;
-        const horas = document.getElementById("horasIA").value;
+    const materia = document.getElementById("materiaIA").value.trim();
+    const nivel = document.getElementById("nivelIA").value;
+    const horas = document.getElementById("horasIA").value;
 
-        if (!materia || !nivel || !horas) {
-            alert("Preencha todos os campos!");
-            return;
-        }
+    if (!materia || !nivel || !horas) {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    chatIA.innerHTML += `
+        <div class="mensagem-user">
+            📚 ${materia}<br>
+            📊 ${nivel}<br>
+            ⏳ ${horas}h por dia
+        </div>
+    `;
+
+    chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
+    chatIA.scrollTop = chatIA.scrollHeight;
+
+    try {
+        const res = await fetch(`${API}/gerar-plano`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ materia, nivel, horas })
+        });
+
+        const data = await res.json();
+        document.getElementById("loadingIA")?.remove();
 
         chatIA.innerHTML += `
-            <div class="mensagem-user">
-                📚 ${materia}<br>
-                📊 ${nivel}<br>
-                ⏳ ${horas}h por dia
+            <div class="mensagem-ia">
+                ${formatarPlanoIA(data.plano)}
             </div>
         `;
 
-        chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
         chatIA.scrollTop = chatIA.scrollHeight;
 
-        try {
-            const res = await fetch(`${API}/gerar-plano`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    materia,
-                    nivel,
-                    horas
-                })
-            });
+        document.getElementById("materiaIA").value = "";
+        document.getElementById("nivelIA").value = "";
+        document.getElementById("horasIA").value = "";
 
-            const data = await res.json();
+    } catch (erro) {
+        document.getElementById("loadingIA")?.remove();
 
-            document.getElementById("loadingIA")?.remove();
+        chatIA.innerHTML += `
+            <div class="mensagem-ia">
+                ❌ Erro ao gerar plano.
+            </div>
+        `;
 
-            chatIA.innerHTML += `
-                <div class="mensagem-ia">
-                    ${data.plano}
-                </div>
-            `;
-
-            chatIA.scrollTop = chatIA.scrollHeight;
-
-            // Limpa campos
-            document.getElementById("materiaIA").value = "";
-            document.getElementById("nivelIA").value = "";
-            document.getElementById("horasIA").value = "";
-
-        } catch (erro) {
-            document.getElementById("loadingIA")?.remove();
-            chatIA.innerHTML += `
-                <div class="mensagem-ia">
-                    ❌ Erro ao gerar plano.
-                </div>
-            `;
-            console.error(erro);
-        }
-    };
-}
-
+        console.error(erro);
+    }
+});
 
 async function carregarHistorico() {
 
@@ -236,19 +237,21 @@ async function carregarHistorico() {
     });
 
     const dados = await res.json();
-
     historicoIA.innerHTML = "";
 
     dados.forEach(item => {
         historicoIA.innerHTML += `
             <div class="mensagem-user">${item.pergunta}</div>
-            <div class="mensagem-ia">${item.resposta}</div>
+            <div class="mensagem-ia">${formatarPlanoIA(item.resposta)}</div>
             <hr>
         `;
     });
 }
 
-// ===============================
+/* =========================================
+   INICIALIZAÇÃO
+========================================= */
+
 carregarTarefas();
 carregarRanking();
 
