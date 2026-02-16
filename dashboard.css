@@ -164,3 +164,84 @@ li.concluida .badge {
     font-weight: bold;
     margin-left: 10px;
 }
+
+/* BOTÃO IA */
+.btn-ia {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* MODAL */
+.modal-ia {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-ia {
+  background: white;
+  width: 500px;
+  max-width: 95%;
+  height: 600px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.header-ia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-ia {
+  flex: 1;
+  overflow-y: auto;
+  margin: 10px 0;
+  padding-right: 5px;
+}
+
+.mensagem-user {
+  text-align: right;
+  background: #e0e7ff;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+.mensagem-ia {
+  text-align: left;
+  background: #f3f4f6;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+.input-area-ia {
+  display: flex;
+  gap: 5px;
+}
+
+.input-area-ia input {
+  flex: 1;
+  padding: 8px;
+}
+
+.input-area-ia button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
