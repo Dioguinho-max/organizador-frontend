@@ -270,6 +270,18 @@ li.concluida .badge {
   border: none;
 }
 
+.input-area-ia.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-area-ia select,
+.input-area-ia input {
+  padding: 8px;
+}
+
+
 .input-area-ia button {
   padding: 8px 12px;
   cursor: pointer;
