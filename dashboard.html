@@ -63,21 +63,26 @@
         <ul id="listaRanking"></ul>
     </div>
 
-    <!--=========================-->
-    <!-- BUTAO DA IA-->
-    <button id="btnIA">Gerar Plano com IA</button>
-<button id="btnHistorico">Ver Histórico IA</button>
+<!-- BOTÃO FLUTUANTE IA -->
+<button id="btnIA" class="btn-ia">🤖</button>
 
-<div id="resultadoIA"></div>
-<div id="historicoIA"></div>
+<!-- MODAL IA -->
+<div id="modalIA" class="modal-ia">
+  <div class="modal-content-ia">
+    
+    <div class="header-ia">
+      <h3>Assistente de Estudos</h3>
+      <button id="fecharIA">X</button>
+    </div>
 
-    <!-- ========================= -->
-    <!-- LOGOUT -->
-    <!-- ========================= -->
-    <button onclick="logout()" class="logout-btn">
-        Sair
-    </button>
+    <div id="chatIA" class="chat-ia"></div>
 
+    <div class="input-area-ia">
+      <input type="text" id="perguntaIA" placeholder="Digite sua pergunta..." />
+      <button id="enviarIA">Enviar</button>
+    </div>
+
+  </div>
 </div>
 
 <script src="dashboard.js"></script>
