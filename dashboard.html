@@ -53,12 +53,21 @@
 
     <div id="chatIA" class="chat-ia"></div>
 
-    <div class="input-area-ia">
-      <input type="text" id="perguntaIA" placeholder="Digite sua pergunta..." />
-      <button id="enviarIA">Enviar</button>
-    </div>
+    <div class="input-area-ia coluna">
 
-  </div>
+  <input type="text" id="materiaIA" placeholder="Matéria (ex: Matemática)">
+  
+  <select id="nivelIA">
+    <option value="">Selecione o nível</option>
+    <option value="iniciante">Iniciante</option>
+    <option value="intermediário">Intermediário</option>
+    <option value="avançado">Avançado</option>
+  </select>
+
+  <input type="number" id="horasIA" placeholder="Horas por dia" min="1" max="24">
+
+  <button id="enviarIA">Gerar Plano</button>
+
 </div>
 
 <!-- MODAL HISTÓRICO -->
