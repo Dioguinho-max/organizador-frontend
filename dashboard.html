@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Dashboard | Organizador de Estudos</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -15,53 +13,30 @@
 
     <h1>📚 Minha Dashboard</h1>
 
-<!-- ========================= -->
-<!-- NOVA TAREFA -->
-<!-- ========================= -->
-<div class="card">
-    <h2>Nova Tarefa</h2>
+    <!-- NOVA TAREFA -->
+    <div class="card">
+        <h2>Nova Tarefa</h2>
 
-    <input 
-        type="text" 
-        id="novaTarefa" 
-        placeholder="Digite uma tarefa..."
-    >
+        <input type="text" id="novaTarefa" placeholder="Digite uma tarefa...">
+        <input type="text" id="descricaoTarefa" placeholder="Descrição (opcional)">
+        <input type="number" id="notaTarefa" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1">
 
-    <input 
-        type="text"
-        id="descricaoTarefa"
-        placeholder="Descrição (opcional)"
-    >
+        <button id="btnCriarTarefa">Adicionar</button>
+    </div>
 
-    <input 
-        type="number"
-        id="notaTarefa"
-        placeholder="Nota (0 a 10)"
-        min="0"
-        max="10"
-        step="0.1"
-    >
-
-    <button onclick="criarTarefa()">
-        Adicionar
-    </button>
-</div>
-
-    <!-- ========================= -->
     <!-- MINHAS TAREFAS -->
-    <!-- ========================= -->
     <div class="card">
         <h2>Minhas Tarefas</h2>
         <ul id="listaTarefas"></ul>
     </div>
 
-    <!-- ========================= -->
     <!-- RANKING -->
-    <!-- ========================= -->
     <div class="card">
         <h2>🏆 Ranking</h2>
         <ul id="listaRanking"></ul>
     </div>
+
+</div>
 
 <!-- BOTÕES -->
 <button id="btnIA" class="btn-ia">🤖</button>
@@ -99,3 +74,7 @@
 
   </div>
 </div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
