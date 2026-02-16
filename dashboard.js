@@ -180,56 +180,44 @@ async function carregarRanking() {
 const API_URL = "https://organizador-backend-dqxr.onrender.com";
 
 const modalIA = document.getElementById("modalIA");
+const modalHistoricoIA = document.getElementById("modalHistoricoIA");
+
 const btnIA = document.getElementById("btnIA");
+const btnHistoricoIA = document.getElementById("btnHistoricoIA");
+
 const fecharIA = document.getElementById("fecharIA");
+const fecharHistoricoIA = document.getElementById("fecharHistoricoIA");
+
 const enviarIA = document.getElementById("enviarIA");
 const chatIA = document.getElementById("chatIA");
+const historicoIA = document.getElementById("historicoIA");
 
-// Abrir modal
+
+// ====================
+// ABRIR CHAT IA
+// ====================
 btnIA.onclick = () => {
     modalIA.style.display = "flex";
+};
+
+// ====================
+// ABRIR HISTÓRICO
+// ====================
+btnHistoricoIA.onclick = async () => {
+    modalHistoricoIA.style.display = "flex";
     carregarHistorico();
 };
 
-// Fechar modal
-fecharIA.onclick = () => {
-    modalIA.style.display = "none";
-};
+fecharIA.onclick = () => modalIA.style.display = "none";
+fecharHistoricoIA.onclick = () => modalHistoricoIA.style.display = "none";
 
-// ===============================
-// Carregar histórico
-// ===============================
-async function carregarHistorico() {
-    chatIA.innerHTML = "";
 
-    try {
-        const res = await fetch(`${API_URL}/historico-ia`, {
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        });
-
-        const dados = await res.json();
-
-        dados.reverse().forEach(item => {
-            chatIA.innerHTML += `
-                <div class="mensagem-user">${item.pergunta}</div>
-                <div class="mensagem-ia">${item.resposta}</div>
-            `;
-        });
-
-        chatIA.scrollTop = chatIA.scrollHeight;
-
-    } catch (erro) {
-        chatIA.innerHTML = "<div class='mensagem-ia'>Erro ao carregar histórico</div>";
-    }
-}
-
-// ===============================
-// Enviar pergunta
-// ===============================
+// ====================
+// ENVIAR PERGUNTA
+// ====================
 enviarIA.onclick = async () => {
 
+    const token = localStorage.getItem("token");
     const perguntaInput = document.getElementById("perguntaIA");
     const pergunta = perguntaInput.value.trim();
 
@@ -241,37 +229,55 @@ enviarIA.onclick = async () => {
     chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
     chatIA.scrollTop = chatIA.scrollHeight;
 
-    try {
-        const res = await fetch(`${API_URL}/gerar-plano`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            },
-            body: JSON.stringify({
-                materia: pergunta,
-                nivel: "intermediário",
-                horas: 2
-            })
-        });
+    const res = await fetch(`${API_URL}/gerar-plano`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            materia: pergunta,
+            nivel: "intermediário",
+            horas: 2
+        })
+    });
 
-        const data = await res.json();
+    const data = await res.json();
 
-        document.getElementById("loadingIA").remove();
+    document.getElementById("loadingIA").remove();
 
-        if (data.erro) {
-            chatIA.innerHTML += `<div class="mensagem-ia">${data.erro}</div>`;
-        } else {
-            chatIA.innerHTML += `<div class="mensagem-ia">${data.plano}</div>`;
-        }
-
-        chatIA.scrollTop = chatIA.scrollHeight;
-
-    } catch (erro) {
-        document.getElementById("loadingIA").remove();
-        chatIA.innerHTML += `<div class="mensagem-ia">Erro ao conectar com servidor</div>`;
-    }
+    chatIA.innerHTML += `<div class="mensagem-ia">${data.plano}</div>`;
+    chatIA.scrollTop = chatIA.scrollHeight;
 };
+
+
+// ====================
+// CARREGAR HISTÓRICO
+// ====================
+async function carregarHistorico() {
+
+    const token = localStorage.getItem("token");
+
+    historicoIA.innerHTML = "Carregando...";
+
+    const res = await fetch(`${API_URL}/historico-ia`, {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    });
+
+    const dados = await res.json();
+
+    historicoIA.innerHTML = "";
+
+    dados.forEach(item => {
+        historicoIA.innerHTML += `
+            <div class="mensagem-user">${item.pergunta}</div>
+            <div class="mensagem-ia">${item.resposta}</div>
+            <hr>
+        `;
+    });
+}
 
 // ===============================
 // LOGOUT
