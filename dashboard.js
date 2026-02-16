@@ -174,60 +174,108 @@ async function carregarRanking() {
 }
 
 // ===============================
-// IA
+// SISTEMA IA MODAL CHAT
 // ===============================
 
-document.getElementById("btnIA").addEventListener("click", async () => {
+const API_URL = "https://organizador-backend-dqxr.onrender.com";
+const token = localStorage.getItem("token");
 
-    const materia = prompt("Qual matéria?");
-    const nivel = prompt("Qual nível?");
-    const horas = prompt("Quantas horas por dia?");
+const modalIA = document.getElementById("modalIA");
+const btnIA = document.getElementById("btnIA");
+const fecharIA = document.getElementById("fecharIA");
+const enviarIA = document.getElementById("enviarIA");
+const chatIA = document.getElementById("chatIA");
 
-    const res = await fetch("https://organizador-backend-dqxr.onrender.com/gerar-plano", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({ materia, nivel, horas })
-    });
+// Abrir modal
+btnIA.onclick = () => {
+    modalIA.style.display = "flex";
+    carregarHistorico();
+};
 
-    const data = await res.json();
+// Fechar modal
+fecharIA.onclick = () => {
+    modalIA.style.display = "none";
+};
 
-    if (data.erro) {
-        alert(data.erro);
-        return;
+// ===============================
+// Carregar histórico
+// ===============================
+async function carregarHistorico() {
+    chatIA.innerHTML = "";
+
+    try {
+        const res = await fetch(`${API_URL}/historico-ia`, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const dados = await res.json();
+
+        dados.reverse().forEach(item => {
+            chatIA.innerHTML += `
+                <div class="mensagem-user">${item.pergunta}</div>
+                <div class="mensagem-ia">${item.resposta}</div>
+            `;
+        });
+
+        chatIA.scrollTop = chatIA.scrollHeight;
+
+    } catch (erro) {
+        chatIA.innerHTML = "<div class='mensagem-ia'>Erro ao carregar histórico</div>";
     }
+}
 
-    document.getElementById("resultadoIA").innerText = data.plano;
-});
+// ===============================
+// Enviar pergunta
+// ===============================
+enviarIA.onclick = async () => {
 
-//===============================
-//HISTORICO IA
-//===============================
-document.getElementById("btnHistorico").addEventListener("click", async () => {
+    const perguntaInput = document.getElementById("perguntaIA");
+    const pergunta = perguntaInput.value.trim();
 
-    const res = await fetch("https://organizador-backend-dqxr.onrender.com/historico-ia", {
-        headers: {
-            "Authorization": "Bearer " + token
+    if (!pergunta) return;
+
+    perguntaInput.value = "";
+
+    // Mostra pergunta do usuário
+    chatIA.innerHTML += `<div class="mensagem-user">${pergunta}</div>`;
+
+    // Loading
+    chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
+    chatIA.scrollTop = chatIA.scrollHeight;
+
+    try {
+        const res = await fetch(`${API_URL}/gerar-plano`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify({
+                materia: pergunta,
+                nivel: "intermediário",
+                horas: 2
+            })
+        });
+
+        const data = await res.json();
+
+        document.getElementById("loadingIA").remove();
+
+        if (data.erro) {
+            chatIA.innerHTML += `<div class="mensagem-ia">${data.erro}</div>`;
+        } else {
+            chatIA.innerHTML += `<div class="mensagem-ia">${data.plano}</div>`;
         }
-    });
 
-    const dados = await res.json();
+        chatIA.scrollTop = chatIA.scrollHeight;
 
-    const div = document.getElementById("historicoIA");
-    div.innerHTML = "";
-
-    dados.forEach(item => {
-        div.innerHTML += `
-            <div>
-                <h3>${item.pergunta}</h3>
-                <p>${item.resposta}</p>
-                <hr>
-            </div>
-        `;
-    });
-});
+    } catch (erro) {
+        document.getElementById("loadingIA").remove();
+        chatIA.innerHTML += `<div class="mensagem-ia">Erro ao conectar com servidor</div>`;
+    }
+};
 
 // ===============================
 // LOGOUT
