@@ -290,3 +290,25 @@ li.concluida .badge {
   border: none;
   border-radius: 6px;
 }
+
+/* ===== BOTÃO SAIR ===== */
+.btn-sair {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10000;
+  transition: 0.3s;
+}
+
+.btn-sair:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
