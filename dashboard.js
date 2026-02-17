@@ -9,8 +9,27 @@ if (!token) {
 }
 
 /* =========================================
+   LOGOUT
+========================================= */
+
+const btnSair = document.getElementById("btnSair");
+
+if (btnSair) {
+    btnSair.addEventListener("click", () => {
+
+        const confirmar = confirm("Tem certeza que deseja sair?");
+
+        if (!confirmar) return;
+
+        localStorage.removeItem("token");
+        window.location.replace("index.html");
+    });
+}
+
+/* =========================================
    FORMATADOR PROFISSIONAL DA IA
 ========================================= */
+
 function formatarPlanoIA(texto) {
     return texto
         .replace(/### (.*)/g, "<h3>$1</h3>")
@@ -24,6 +43,7 @@ function formatarPlanoIA(texto) {
 /* =========================================
    CRIAR TAREFA
 ========================================= */
+
 async function criarTarefa() {
 
     const titulo = document.getElementById("novaTarefa").value.trim();
@@ -61,6 +81,7 @@ if (btnCriar) btnCriar.addEventListener("click", criarTarefa);
 /* =========================================
    LISTAR TAREFAS
 ========================================= */
+
 async function carregarTarefas() {
 
     const lista = document.getElementById("listaTarefas");
@@ -89,6 +110,7 @@ async function carregarTarefas() {
         if (!t.concluida) {
             const btnConcluir = document.createElement("button");
             btnConcluir.textContent = "✔";
+            btnConcluir.classList.add("btn-concluir");
             btnConcluir.onclick = () => concluir(t.id);
             li.appendChild(btnConcluir);
         }
@@ -125,6 +147,7 @@ async function excluir(id) {
 /* =========================================
    RANKING
 ========================================= */
+
 async function carregarRanking() {
 
     const lista = document.getElementById("listaRanking");
