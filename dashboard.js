@@ -9,15 +9,55 @@ if (!token) {
 }
 
 /* =========================================
-   LOGOUT
+   LOGOUT PROFISSIONAL
 ========================================= */
 
 const btnSair = document.getElementById("btnSair");
+const modalLogout = document.getElementById("modalLogout");
+const cancelarLogout = document.getElementById("cancelarLogout");
+const confirmarLogout = document.getElementById("confirmarLogout");
 
+// Abrir modal
 if (btnSair) {
     btnSair.addEventListener("click", () => {
-        document.getElementById("modalLogout").style.display = "flex";
+        modalLogout.style.display = "flex";
     });
+}
+
+// Cancelar logout
+if (cancelarLogout) {
+    cancelarLogout.addEventListener("click", () => {
+        fecharModalLogout();
+    });
+}
+
+// Confirmar logout
+if (confirmarLogout) {
+    confirmarLogout.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.replace("index.html");
+    });
+}
+
+// Fechar clicando fora
+if (modalLogout) {
+    modalLogout.addEventListener("click", (e) => {
+        if (e.target === modalLogout) {
+            fecharModalLogout();
+        }
+    });
+}
+
+// Fechar com ESC
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalLogout.style.display === "flex") {
+        fecharModalLogout();
+    }
+});
+
+// Função fechar
+function fecharModalLogout() {
+    modalLogout.style.display = "none";
 }
 
 /* =========================================
