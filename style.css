@@ -1,0 +1,81 @@
+/* ============================
+   PÁGINAS LEGAIS (TERMOS / PRIVACIDADE)
+============================ */
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #e2e8f0;
+}
+
+.container-termos {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 40px;
+    background: rgba(30, 41, 59, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.6s ease;
+}
+
+.container-termos h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #38bdf8;
+}
+
+.container-termos h2 {
+    margin-top: 30px;
+    color: #f1f5f9;
+    border-left: 4px solid #38bdf8;
+    padding-left: 10px;
+}
+
+.container-termos p {
+    margin-top: 10px;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
+
+.container-termos a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+.container-termos a:hover {
+    text-decoration: underline;
+}
+
+/* Botão voltar */
+.btn-voltar {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background: #0ea5e9;
+    transform: translateY(-2px);
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
