@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<title>Login | Organizador de Estudos</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Organizador de estudos</title>
+
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="login.css">
-
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-
 </head>
+
 <body>
 
-<div class="login-container">
-  <div class="login-card">
-    <h2>📚 Organizador de Estudos</h2>
+<div class="container">
 
-    <input type="text" id="username" placeholder="Usuário" />
-    <input type="password" id="password" placeholder="Senha" />
-
-    <button onclick="login()" class="btn-login">Entrar</button>
-    <button onclick="register()" class="btn-register">Cadastrar</button>
-
-    <p id="mensagem" class="msg"></p>
+  <div class="input-box animation" style="--i:1;">
+      <input type="text" required>
+      <label>Usuário</label>
+      <i class="bx bxs-user"></i>
   </div>
+
+  <div class="input-box animation" style="--i:2;">
+      <input type="password" required>
+      <label>Senha</label>
+      <i class="bx bxs-lock-alt"></i>
+  </div>
+
+  <button class="animation" style="--i:3;">Entrar</button>
+
 </div>
 
-<script src="script.js"></script>
 </body>
-</html>`
+</html>
