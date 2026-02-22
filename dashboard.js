@@ -16,13 +16,7 @@ const btnSair = document.getElementById("btnSair");
 
 if (btnSair) {
     btnSair.addEventListener("click", () => {
-
-        const confirmar = confirm("Tem certeza que deseja sair?");
-
-        if (!confirmar) return;
-
-        localStorage.removeItem("token");
-        window.location.replace("index.html");
+        document.getElementById("modalLogout").style.display = "flex";
     });
 }
 
