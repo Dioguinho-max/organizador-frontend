@@ -1,15 +1,38 @@
-/* ===== FUNDO MODERNO ===== */
-body {
-    height: 100vh;
+/* =======================================================
+   🎨 DARK PREMIUM - COMBINANDO COM DASHBOARD
+======================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+:root {
+    --bg-primary: #0f1115;
+    --bg-card: #151922;
+    --bg-input: #1c212c;
+    --border-color: #262b36;
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #a0a7b5;
+
+    --accent: #ffffff;
+}
+
+/* RESET */
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #2a2e43);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* ===== CARD CENTRAL ===== */
+/* CONTAINER */
 .login-container {
     width: 100%;
     display: flex;
@@ -17,123 +40,98 @@ body {
     align-items: center;
 }
 
+/* CARD */
 .login-card {
-    background: #1e293b;
-    padding: 40px 35px;
-    border-radius: 15px;
-    max-width: 380px;
+    background: var(--bg-card);
+    padding: 45px 35px;
+    border-radius: 14px;
     width: 100%;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
+    max-width: 400px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    animation: fadeUp 0.6s ease forwards;
 }
 
-/* ===== ANIMAÇÃO ===== */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* TÍTULO */
 .login-card h2 {
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 25px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
 }
 
-/* ===== CAMPOS ===== */
+/* INPUTS */
 .login-card input {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    background: #273349;
-    color: #fff;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 8px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.3s ease;
+    font-size: 0.95rem;
 }
 
 .login-card input:focus {
-    background: #334155;
-    transform: scale(1.03);
+    border-color: #3a4252;
+    background: #202634;
 }
 
-/* ===== BOTÕES ===== */
+/* BOTÕES */
 .btn-login,
 .btn-register {
     width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
+    padding: 13px;
+    border-radius: 8px;
     margin-top: 12px;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
+/* BOTÃO LOGIN */
 .btn-login {
-    background: #3b82f6;
-    color: #fff;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
 .btn-login:hover {
-    background: #2563eb;
-    transform: scale(1.03);
+    background: white;
+    color: black;
 }
 
+/* BOTÃO REGISTER */
 .btn-register {
-    background: #10b981;
-    color: #fff;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
 }
 
 .btn-register:hover {
-    background: #059669;
-    transform: scale(1.03);
+    border-color: #3a4252;
 }
 
-/* ===== MENSAGEM ===== */
+/* MENSAGEM */
 .msg {
-    margin-top: 12px;
-    font-size: 0.95rem;
-    color: #ffa500;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #f59e0b;
+    text-align: center;
 }
 
-/* ===== INPUT BOX ESTILO MODERNO ===== */
-.input-box {
-    position: relative;
-    margin: 15px 0;
-}
-
-.input-box input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    background: #273349;
-    border: none;
-    color: #fff;
-    outline: none;
-}
-
-.input-box label {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    color: #aaa;
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.input-box input:focus + label,
-.input-box input:valid + label {
-    top: -8px;
-    font-size: 12px;
-    color: #3b82f6;
+/* ANIMAÇÃO SUAVE */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
