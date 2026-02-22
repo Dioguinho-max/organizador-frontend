@@ -150,37 +150,26 @@ body {
 }
 
 /* =========================
-   FOOTER LOGIN PRO
+   FOOTER IGUAL DASHBOARD
 ========================= */
 
-.footer-login {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer {
+    position: relative;
+    padding: 30px 8%;
     background: #0d1117;
     border-top: 1px solid #1f2937;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 0.85rem;
-    color: #6e7681;
     overflow: hidden;
 }
 
-.footer-login p {
-    margin: 4px 0;
-}
-
-.footer-login a {
-    color: #3b82f6;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.footer-login a:hover {
-    color: #60a5fa;
-}
-
-.footer-login .footer-line {
+/* Linha animada */
+.footer-line {
     position: absolute;
     top: 0;
     left: -100%;
@@ -188,4 +177,57 @@ body {
     width: 100%;
     background: linear-gradient(90deg, transparent, #3b82f6, transparent);
     animation: slide 4s linear infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.footer-left p {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    color: #6e7681;
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
 }
