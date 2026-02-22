@@ -1,146 +1,113 @@
-/* =======================================================
-   🎨 IMPORTAÇÃO DE FONTES
-======================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
-
-/* =======================================================
-   🎨 VARIÁVEIS (Mesmo padrão do dashboard)
-======================================================= */
-:root {
-  --bg-primary: #0f1115;
-  --bg-card: #151922;
-  --bg-input: #1c212c;
-
-  --border-color: #262b36;
-
-  --text-primary: #f5f5f5;
-  --text-secondary: #a0a7b5;
-
-  --accent: #ffffff;
-}
-
-
-/* =======================================================
-   🔧 RESET
-======================================================= */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-
-/* =======================================================
-   🧱 BASE DA PÁGINA
-======================================================= */
+/* ================= BODY ================= */
 body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-
+  min-height: 100vh;
+  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
+/* ================= CONTAINER ================= */
+.container {
+  width: 320px;
+}
 
-/* =======================================================
-   📦 CONTAINER CENTRAL
-======================================================= */
-.auth-container {
-  text-align: center;
+/* ================= INPUT BOX ================= */
+.input-box {
+  position: relative;
   width: 100%;
-  max-width: 420px;
-  animation: fadeUp 0.8s ease forwards;
+  height: 50px;
+  margin: 30px 0;
 }
 
-
-/* =======================================================
-   🏷 TÍTULO
-======================================================= */
-.auth-container h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.auth-container p {
-  color: var(--text-secondary);
-  margin-bottom: 40px;
-}
-
-
-/* =======================================================
-   🗂 CARD LOGIN
-======================================================= */
-.auth-card {
-  background: var(--bg-card);
-  padding: 40px;
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  transition: 0.3s ease;
-}
-
-.auth-card:hover {
-  border-color: #333a46;
-}
-
-
-/* =======================================================
-   📝 INPUTS
-======================================================= */
-input {
+/* Input */
+.input-box input {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 18px;
-
-  background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-
-  color: var(--text-primary);
+  height: 100%;
+  background: transparent;
+  border: none;
   outline: none;
-  transition: 0.3s;
+  border-bottom: 2px solid #333;
+  color: #fff;
+  font-size: 16px;
+  padding-right: 30px;
+  transition: .3s;
 }
 
-input:focus {
-  border-color: #3a4252;
-  background: #202634;
+/* Label */
+.input-box label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+  transition: .3s;
 }
 
+/* Ícone */
+.input-box i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 18px;
+}
 
-/* =======================================================
-   🔘 BOTÃO LOGIN
-======================================================= */
+/* Efeito quando foca */
+.input-box input:focus,
+.input-box input:valid {
+  border-bottom-color: #fff;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.input-box input:focus ~ i {
+  color: #fff;
+}
+
+/* ================= BOTÃO ================= */
 button {
   width: 100%;
-  padding: 14px;
-
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-
-  color: var(--text-primary);
+  height: 45px;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
   cursor: pointer;
-  transition: 0.3s;
+  transition: .3s;
+  border-radius: 6px;
 }
 
 button:hover {
-  background: white;
-  color: black;
+  background: #fff;
+  color: #000;
 }
 
+/* ================= ANIMAÇÃO ================= */
+.animation {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp .6s ease forwards;
+  animation-delay: calc(.1s * var(--i));
+}
 
-/* =======================================================
-   ✨ ANIMAÇÃO
-======================================================= */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
+@keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
