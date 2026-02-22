@@ -319,3 +319,60 @@ li.concluida {
         text-align: center;
     }
 }
+
+/* ================= MODAL LOGOUT ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 16px;
+    width: 320px;
+    text-align: center;
+    animation: aparecer 0.25s ease;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-secundario {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-perigo {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
