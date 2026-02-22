@@ -261,28 +261,3 @@ input:-webkit-autofill:active {
 .login-termos a:hover {
     text-decoration: underline;
 }
-
-/* ============================
-   FOOTER GLOBAL
-============================ */
-
-.footer {
-    margin-top: 40px;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 13px;
-    background: transparent;
-    color: #94a3b8;
-}
-
-.footer-content a {
-    color: #38bdf8;
-    text-decoration: none;
-    margin: 0 5px;
-    transition: 0.2s;
-}
-
-.footer-content a:hover {
-    text-decoration: underline;
-    color: #0ea5e9;
-}
