@@ -243,13 +243,32 @@ li.concluida {
 }
 
 /* =========================
-   FOOTER DASHBOARD
+   FOOTER PROFISSIONAL
 ========================= */
+
 .footer {
-    margin-top: 80px;
+    position: relative;
+    margin-top: 100px;
     padding: 30px 8%;
     background: #0d1117;
     border-top: 1px solid #1f2937;
+    overflow: hidden;
+}
+
+/* Linha animada */
+.footer-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    animation: slide 4s linear infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 .footer-container {
@@ -262,7 +281,6 @@ li.concluida {
 .footer-left h4 {
     color: #ffffff;
     margin-bottom: 5px;
-    font-weight: 500;
 }
 
 .footer-left p {
@@ -277,8 +295,20 @@ li.concluida {
 .footer-right p {
     color: #6e7681;
     font-size: 0.85rem;
+    margin: 4px 0;
 }
 
+.footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
