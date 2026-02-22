@@ -1,107 +1,148 @@
-/* ===== FUNDO MODERNO ===== */
+/* =======================================================
+   🎨 IMPORTAÇÃO DE FONTES
+======================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
+
+
+/* =======================================================
+   🎨 VARIÁVEIS (Mesmo padrão do dashboard)
+======================================================= */
+:root {
+  --bg-primary: #0f1115;
+  --bg-card: #151922;
+  --bg-input: #1c212c;
+
+  --border-color: #262b36;
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a7b5;
+
+  --accent: #ffffff;
+}
+
+
+/* =======================================================
+   🔧 RESET
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* =======================================================
+   🧱 BASE DA PÁGINA
+======================================================= */
 body {
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #2a2e43);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* ===== CARD CENTRAL ===== */
-.login-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* =======================================================
+   📦 CONTAINER CENTRAL
+======================================================= */
+.auth-container {
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeUp 0.8s ease forwards;
 }
 
-.login-card {
-    background: #1e293b;
-    padding: 40px 35px;
-    border-radius: 15px;
-    max-width: 380px;
-    width: 100%;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
+
+/* =======================================================
+   🏷 TÍTULO
+======================================================= */
+.auth-container h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-/* ===== ANIMAÇÃO ===== */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.auth-container p {
+  color: var(--text-secondary);
+  margin-bottom: 40px;
 }
 
-.login-card h2 {
-    color: #fff;
-    margin-bottom: 25px;
-    font-size: 1.8rem;
+
+/* =======================================================
+   🗂 CARD LOGIN
+======================================================= */
+.auth-card {
+  background: var(--bg-card);
+  padding: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  transition: 0.3s ease;
 }
 
-/* ===== CAMPOS ===== */
-.login-card input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    background: #273349;
-    color: #fff;
-    outline: none;
-    transition: 0.25s ease;
+.auth-card:hover {
+  border-color: #333a46;
 }
 
-.login-card input:focus {
-    background: #334155;
-    transform: scale(1.03);
+
+/* =======================================================
+   📝 INPUTS
+======================================================= */
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  color: var(--text-primary);
+  outline: none;
+  transition: 0.3s;
 }
 
-/* ===== BOTÕES ===== */
-.btn-login,
-.btn-register {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
+input:focus {
+  border-color: #3a4252;
+  background: #202634;
 }
 
-.btn-login {
-    background: #3b82f6;
-    color: #fff;
+
+/* =======================================================
+   🔘 BOTÃO LOGIN
+======================================================= */
+button {
+  width: 100%;
+  padding: 14px;
+
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.btn-login:hover {
-    background: #2563eb;
-    transform: scale(1.03);
+button:hover {
+  background: white;
+  color: black;
 }
 
-.btn-register {
-    background: #10b981;
-    color: #fff;
-}
 
-.btn-register:hover {
-    background: #059669;
-    transform: scale(1.03);
-}
-
-/* ===== MENSAGEM ===== */
-.msg {
-    margin-top: 12px;
-    font-size: 0.95rem;
-    color: #ffa500;
+/* =======================================================
+   ✨ ANIMAÇÃO
+======================================================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
