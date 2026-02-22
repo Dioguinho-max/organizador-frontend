@@ -1,314 +1,227 @@
-/* ===== DASHBOARD STYLE ===== */
+/* =======================================================
+   🎨 IMPORTAÇÃO DE FONTES
+======================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
+
+/* =======================================================
+   🔧 RESET GLOBAL
+   Remove espaçamentos padrão do navegador
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* =======================================================
+   🧱 ESTRUTURA BASE DA PÁGINA
+======================================================= */
 body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: white;
-    padding: 30px;
+  font-family: 'Inter', sans-serif;      /* Fonte principal */
+  background: #f8f8f8;                   /* Fundo claro premium */
+  color: #1a1a1a;                        /* Cor principal do texto */
+  padding: 60px 8%;                      /* Espaçamento lateral */
 }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-}
 
+/* =======================================================
+   🏷 TÍTULO PRINCIPAL
+======================================================= */
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
+  font-family: 'Playfair Display', serif; /* Fonte elegante */
+  font-size: 2.2rem;
+  margin-bottom: 40px;
 }
 
-/* ===== CARDS ===== */
+
+/* =======================================================
+   📦 CONTAINER CENTRAL
+======================================================= */
+.container {
+  max-width: 900px;   /* Limita largura máxima */
+  margin: auto;       /* Centraliza na tela */
+}
+
+
+/* =======================================================
+   🗂 CARDS (Blocos principais)
+======================================================= */
 .card {
-    background: rgba(30, 41, 59, 0.9);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    transition: 0.3s ease;
+  background: white;           /* Fundo branco */
+  padding: 40px;
+  border: 1px solid #eee;      /* Borda suave */
+  margin-bottom: 30px;
+  animation: fadeUp 0.6s ease forwards; /* Animação suave */
 }
 
-.card:hover {
-    transform: translateY(-3px);
+/* Título dentro do card */
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
 }
 
-h2 {
-    margin-bottom: 15px;
+
+/* =======================================================
+   📝 INPUTS E SELECT
+======================================================= */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  outline: none;
+  transition: 0.3s;
 }
 
-/* ===== INPUT ===== */
-input {
-    width: 70%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: #334155;
-    color: white;
-    margin-right: 10px;
-    outline: none;
-    transition: 0.3s;
+/* Efeito ao clicar no input */
+input:focus,
+select:focus {
+  border-color: #1a1a1a;
 }
 
-input:focus {
-    background: #475569;
-}
 
-/* ===== BOTÕES ===== */
+/* =======================================================
+   🔘 BOTÕES
+======================================================= */
 button {
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: none;
-    background: #3b82f6;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+  padding: 10px 20px;
+  border: 1px solid #1a1a1a;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
+/* Efeito hover elegante */
 button:hover {
-    background: #2563eb;
-    transform: scale(1.05);
+  background: #1a1a1a;
+  color: white;
 }
 
-.logout-btn {
-    background: #ef4444;
-    width: 100%;
-}
 
-.logout-btn:hover {
-    background: #dc2626;
-}
-
-/* ===== LISTAS ===== */
+/* =======================================================
+   📋 LISTAS DE TAREFAS
+======================================================= */
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;  /* Remove bolinhas */
 }
 
+/* Cada item da lista */
 li {
-    background: #334155;
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.3s;
-}
-
-li:hover {
-    transform: translateX(5px);
-}
-
-/* ===== BOTÃO CONCLUIR ===== */
-.btn-concluir {
-    background: #10b981;
-}
-
-.btn-concluir:hover {
-    background: #059669;
-}
-
-/* ===== RANKING ===== */
-.ranking-item {
-    display: flex;
-    justify-content: space-between;
-    background: #1e293b;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-
-.posicao {
-    font-weight: bold;
-    color: #facc15;
-}
-
-.nome {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.pontos {
-    font-weight: bold;
-}
-
-/* ===== TAREFA CONCLUÍDA ===== */
-li.concluida {
-    opacity: 0.6;
-    background: #1e293b;
-    border-left: 5px solid #10b981;
-    transform: scale(0.98);
-}
-
-/* ===== TEXTO CONCLUÍDO ===== */
-li.concluida strong {
-    color: #94a3b8;
-}
-
-li.concluida .descricao {
-    color: #94a3b8;
-}
-
-li.concluida .badge {
-    opacity: 0.7;
-}
-
-/* Badge concluída */
-.badge {
-    background: #10b981;
-    color: black;
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-/* BOTÃO IA */
-.btn-ia {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-/* BOTÃO HISTÓRICO */
-.btn-historico {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  background: #1f2937;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-/* MODAL FUNDO */
-.modal-ia {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-}
-
-/* CAIXA DO MODAL */
-.modal-content-ia {
-  background: #111827;
-  color: white;
-  width: 500px;
-  max-width: 95%;
-  height: 600px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-
-/* HEADER */
-.header-ia {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* CHAT */
+/* Tarefa concluída */
+li.concluida {
+  opacity: 0.5;
+}
+
+
+/* =======================================================
+   🏷 BADGE (Nota)
+======================================================= */
+.badge {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border: 1px solid #1a1a1a;
+}
+
+
+/* =======================================================
+   🤖 BOTÕES FLUTUANTES (IA e Histórico)
+======================================================= */
+.btn-ia,
+.btn-historico {
+  position: fixed;
+  right: 30px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border: 1px solid #1a1a1a;
+  background: white;
+  cursor: pointer;
+}
+
+/* Posição específica */
+.btn-ia {
+  bottom: 30px;
+}
+
+.btn-historico {
+  bottom: 100px;
+}
+
+
+/* =======================================================
+   🪟 MODAL DA IA
+======================================================= */
+
+/* Fundo escuro */
+.modal-ia {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Caixa central do modal */
+.modal-content-ia {
+  background: white;
+  color: #1a1a1a;
+  border: 1px solid #ddd;
+  width: 500px;
+  max-width: 95%;
+  height: 600px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =======================================================
+   💬 CHAT IA
+======================================================= */
 .chat-ia {
   flex: 1;
   overflow-y: auto;
-  margin: 10px 0;
+  margin: 15px 0;
   padding: 10px;
-  background: #1f2937;
-  border-radius: 8px;
+  background: #fafafa;
+  border: 1px solid #eee;
 }
 
-/* MENSAGEM USUÁRIO */
+/* Mensagem usuário */
 .mensagem-user {
   text-align: right;
-  background: #2563eb;
-  color: white;
-  padding: 8px;
-  border-radius: 8px;
-  margin: 5px 0;
+  margin-bottom: 10px;
 }
 
-/* MENSAGEM IA */
+/* Mensagem IA */
 .mensagem-ia {
   text-align: left;
-  background: #374151;
-  color: white;
-  padding: 8px;
-  border-radius: 8px;
-  margin: 5px 0;
-}
-
-/* INPUT */
-.input-area-ia {
-  display: flex;
-  gap: 5px;
-}
-
-.input-area-ia input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-}
-
-.input-area-ia.coluna {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.input-area-ia select,
-.input-area-ia input {
-  padding: 8px;
+  margin-bottom: 10px;
 }
 
 
-.input-area-ia button {
-  padding: 8px 12px;
-  cursor: pointer;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-}
-
-/* ===== BOTÃO SAIR ===== */
-.btn-sair {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  z-index: 10000;
-  transition: 0.3s;
-}
-
-.btn-sair:hover {
-  background: #dc2626;
-  transform: scale(1.05);
+/* =======================================================
+   ✨ ANIMAÇÕES
+======================================================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
