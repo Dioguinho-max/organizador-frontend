@@ -307,9 +307,6 @@ if (enviarIA && chatIA) {
 
             // Limite de tamanho
             let texto = (data.plano || "").trim();
-            if (texto.length > 1200) {
-                texto = texto.substring(0, 1200) + "\n\n(Resposta resumida)";
-            }
 
             let i = 0;
 
