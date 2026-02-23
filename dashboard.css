@@ -240,9 +240,10 @@ li.concluida {
   100% { border-color: transparent; }
 }
 
-/* =======================================================
-   FOOTER
-======================================================= */
+/* =========================
+   FOOTER PROFISSIONAL
+========================= */
+
 .footer {
     position: relative;
     margin-top: 100px;
@@ -252,6 +253,7 @@ li.concluida {
     overflow: hidden;
 }
 
+/* Linha animada */
 .footer-line {
     position: absolute;
     top: 0;
@@ -267,7 +269,55 @@ li.concluida {
     100% { left: 100%; }
 }
 
-/* =======================================================
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.footer-left p {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    color: #6e7681;
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
+}
+   =======================================================
    MODAL LOGOUT
 ======================================================= */
 .modal {
