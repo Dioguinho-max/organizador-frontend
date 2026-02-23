@@ -217,32 +217,31 @@ const historicoIA = document.getElementById("historicoIA");
 
 /* ===== ABRIR / FECHAR ===== */
 
-if (btnIA) {
+if (btnIA && modalIA) {
     btnIA.addEventListener("click", () => {
         modalIA.classList.add("active");
     });
 }
 
-if (btnHistoricoIA) {
+if (btnHistoricoIA && modalHistoricoIA) {
     btnHistoricoIA.addEventListener("click", () => {
         modalHistoricoIA.classList.add("active");
         carregarHistorico();
     });
 }
 
-if (fecharIA) {
+if (fecharIA && modalIA) {
     fecharIA.addEventListener("click", () => {
         modalIA.classList.remove("active");
     });
 }
 
-if (fecharHistoricoIA) {
+if (fecharHistoricoIA && modalHistoricoIA) {
     fecharHistoricoIA.addEventListener("click", () => {
         modalHistoricoIA.classList.remove("active");
     });
 }
 
-/* Fechar clicando fora */
 if (modalIA) {
     modalIA.addEventListener("click", (e) => {
         if (e.target === modalIA) {
@@ -259,7 +258,6 @@ if (modalHistoricoIA) {
     });
 }
 
-/* Fechar com ESC */
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         if (modalIA) modalIA.classList.remove("active");
@@ -269,12 +267,18 @@ document.addEventListener("keydown", (e) => {
 
 /* ===== ENVIO IA ===== */
 
-if (enviarIA) {
+if (enviarIA && chatIA) {
     enviarIA.addEventListener("click", async () => {
 
-        const materia = document.getElementById("materiaIA").value.trim();
-        const nivel = document.getElementById("nivelIA").value;
-        const horas = document.getElementById("horasIA").value;
+        const materiaInput = document.getElementById("materiaIA");
+        const nivelInput = document.getElementById("nivelIA");
+        const horasInput = document.getElementById("horasIA");
+
+        if (!materiaInput || !nivelInput || !horasInput) return;
+
+        const materia = materiaInput.value.trim();
+        const nivel = nivelInput.value;
+        const horas = horasInput.value;
 
         if (!materia || !nivel || !horas) {
             alert("Preencha todos os campos!");
@@ -289,7 +293,12 @@ if (enviarIA) {
             </div>
         `;
 
-        chatIA.innerHTML += `<div class="mensagem-ia" id="loadingIA">IA pensando...</div>`;
+        const loadingDiv = document.createElement("div");
+        loadingDiv.classList.add("mensagem-ia");
+        loadingDiv.id = "loadingIA";
+        loadingDiv.textContent = "IA pensando...";
+        chatIA.appendChild(loadingDiv);
+
         chatIA.scrollTop = chatIA.scrollHeight;
 
         try {
@@ -303,25 +312,34 @@ if (enviarIA) {
             });
 
             const data = await res.json();
-            const loading = document.getElementById("loadingIA");
-            if (loading) loading.remove();
 
-            chatIA.innerHTML += `
-                <div class="mensagem-ia">
-                    ${formatarPlanoIA(data.plano)}
-                </div>
-            `;
+            if (loadingDiv) loadingDiv.remove();
 
-            chatIA.scrollTop = chatIA.scrollHeight;
+            const mensagemDiv = document.createElement("div");
+            mensagemDiv.classList.add("mensagem-ia");
+            chatIA.appendChild(mensagemDiv);
 
-            document.getElementById("materiaIA").value = "";
-            document.getElementById("nivelIA").value = "";
-            document.getElementById("horasIA").value = "";
+            const texto = formatarPlanoIA(data.plano);
+            let i = 0;
+
+            function digitar() {
+                if (i < texto.length) {
+                    mensagemDiv.innerHTML += texto.charAt(i);
+                    i++;
+                    chatIA.scrollTop = chatIA.scrollHeight;
+                    setTimeout(digitar, 8);
+                }
+            }
+
+            digitar();
+
+            materiaInput.value = "";
+            nivelInput.value = "";
+            horasInput.value = "";
 
         } catch (erro) {
 
-            const loading = document.getElementById("loadingIA");
-            if (loading) loading.remove();
+            if (loadingDiv) loadingDiv.remove();
 
             chatIA.innerHTML += `
                 <div class="mensagem-ia">
