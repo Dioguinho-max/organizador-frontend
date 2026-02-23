@@ -242,22 +242,6 @@ if (fecharHistoricoIA && modalHistoricoIA) {
     });
 }
 
-if (modalIA) {
-    modalIA.addEventListener("click", (e) => {
-        if (e.target === modalIA) {
-            modalIA.classList.remove("active");
-        }
-    });
-}
-
-if (modalHistoricoIA) {
-    modalHistoricoIA.addEventListener("click", (e) => {
-        if (e.target === modalHistoricoIA) {
-            modalHistoricoIA.classList.remove("active");
-        }
-    });
-}
-
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         if (modalIA) modalIA.classList.remove("active");
@@ -268,6 +252,7 @@ document.addEventListener("keydown", (e) => {
 /* ===== ENVIO IA ===== */
 
 if (enviarIA && chatIA) {
+
     enviarIA.addEventListener("click", async () => {
 
         const materiaInput = document.getElementById("materiaIA");
@@ -285,17 +270,18 @@ if (enviarIA && chatIA) {
             return;
         }
 
+        // Mensagem do usuário
         chatIA.innerHTML += `
             <div class="mensagem-user">
-                📚 ${materia}<br>
-                📊 ${nivel}<br>
+                📚 ${materia}
+                📊 ${nivel}
                 ⏳ ${horas}h por dia
             </div>
         `;
 
+        // Indicador
         const loadingDiv = document.createElement("div");
         loadingDiv.classList.add("mensagem-ia");
-        loadingDiv.id = "loadingIA";
         loadingDiv.textContent = "IA pensando...";
         chatIA.appendChild(loadingDiv);
 
@@ -312,22 +298,27 @@ if (enviarIA && chatIA) {
             });
 
             const data = await res.json();
-
-            if (loadingDiv) loadingDiv.remove();
+            loadingDiv.remove();
 
             const mensagemDiv = document.createElement("div");
             mensagemDiv.classList.add("mensagem-ia");
+            mensagemDiv.style.whiteSpace = "pre-wrap"; // mantém quebra de linha natural
             chatIA.appendChild(mensagemDiv);
 
-            const texto = formatarPlanoIA(data.plano);
+            // Limite de tamanho
+            let texto = (data.plano || "").trim();
+            if (texto.length > 1200) {
+                texto = texto.substring(0, 1200) + "\n\n(Resposta resumida)";
+            }
+
             let i = 0;
 
             function digitar() {
                 if (i < texto.length) {
-                    mensagemDiv.innerHTML += texto.charAt(i);
+                    mensagemDiv.textContent += texto.charAt(i);
                     i++;
                     chatIA.scrollTop = chatIA.scrollHeight;
-                    setTimeout(digitar, 8);
+                    setTimeout(digitar, 7);
                 }
             }
 
@@ -339,7 +330,7 @@ if (enviarIA && chatIA) {
 
         } catch (erro) {
 
-            if (loadingDiv) loadingDiv.remove();
+            loadingDiv.remove();
 
             chatIA.innerHTML += `
                 <div class="mensagem-ia">
@@ -349,7 +340,9 @@ if (enviarIA && chatIA) {
 
             console.error(erro);
         }
+
     });
+
 }
 
 /* ===== HISTÓRICO ===== */
@@ -371,11 +364,18 @@ async function carregarHistorico() {
         historicoIA.innerHTML = "";
 
         dados.forEach(item => {
-            historicoIA.innerHTML += `
-                <div class="mensagem-user">${item.pergunta}</div>
-                <div class="mensagem-ia">${formatarPlanoIA(item.resposta)}</div>
-                <hr>
-            `;
+            const userMsg = document.createElement("div");
+            userMsg.classList.add("mensagem-user");
+            userMsg.textContent = item.pergunta;
+
+            const iaMsg = document.createElement("div");
+            iaMsg.classList.add("mensagem-ia");
+            iaMsg.style.whiteSpace = "pre-wrap";
+            iaMsg.textContent = item.resposta;
+
+            historicoIA.appendChild(userMsg);
+            historicoIA.appendChild(iaMsg);
+            historicoIA.appendChild(document.createElement("hr"));
         });
 
     } catch (erro) {
@@ -383,7 +383,6 @@ async function carregarHistorico() {
         console.error(erro);
     }
 }
-
 
 /* =========================================
    INICIALIZAÇÃO
