@@ -3,23 +3,27 @@
 ======================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
+
 /* =======================================================
-   🎨 VARIÁVEIS DE COR
+   🎨 VARIÁVEIS DE COR (Dark Theme)
+   Facilita mudar cores no futuro
 ======================================================= */
 :root {
-  --bg-primary: #0f1115;
-  --bg-secondary: #151922;
-  --bg-tertiary: #1c212c;
-  --bg-card: #151922;
+  --bg-primary: #0f1115;      /* Fundo principal */
+  --bg-secondary: #151922;    /* Cards */
+  --bg-tertiary: #1c212c;     /* Inputs */
 
   --border-color: #262b36;
 
   --text-primary: #f5f5f5;
   --text-secondary: #a0a7b5;
+
+  --accent: #ffffff;
 }
 
+
 /* =======================================================
-   RESET
+   🔧 RESET GLOBAL
 ======================================================= */
 * {
   margin: 0;
@@ -27,24 +31,20 @@
   box-sizing: border-box;
 }
 
+
 /* =======================================================
-   BASE
+   🧱 BASE DA PÁGINA
 ======================================================= */
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
+  padding: 60px 8%;
 }
 
-/* padding agora vai no container, NÃO no body */
-.container {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 0 8%;
-}
 
 /* =======================================================
-   TÍTULO
+   🏷 TÍTULO PRINCIPAL
 ======================================================= */
 h1 {
   font-family: 'Playfair Display', serif;
@@ -52,8 +52,18 @@ h1 {
   margin-bottom: 40px;
 }
 
+
 /* =======================================================
-   CARDS
+   📦 CONTAINER CENTRAL
+======================================================= */
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+
+/* =======================================================
+   🗂 CARDS
 ======================================================= */
 .card {
   background: var(--bg-secondary);
@@ -64,13 +74,20 @@ h1 {
   transition: 0.3s ease;
 }
 
+/* Efeito hover suave */
 .card:hover {
   border-color: #333a46;
   transform: translateY(-3px);
 }
 
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+}
+
+
 /* =======================================================
-   INPUTS
+   📝 INPUTS E SELECT
 ======================================================= */
 input,
 select {
@@ -91,8 +108,9 @@ select:focus {
   background: #202634;
 }
 
+
 /* =======================================================
-   BOTÕES
+   🔘 BOTÕES
 ======================================================= */
 button {
   padding: 10px 20px;
@@ -109,18 +127,104 @@ button:hover {
   color: black;
 }
 
+
 /* =======================================================
-   LOGOUT FIXO NO TOPO
+   📋 LISTA DE TAREFAS
 ======================================================= */
-#btnSair {
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li.concluida {
+  opacity: 0.4;
+}
+
+
+/* =======================================================
+   🏷 BADGE (Nota)
+======================================================= */
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+}
+
+
+/* =======================================================
+   🤖 BOTÕES FLUTUANTES
+======================================================= */
+.btn-ia,
+.btn-historico {
   position: fixed;
-  top: 25px;
   right: 30px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-ia {
+  bottom: 30px;
+}
+
+.btn-historico {
+  bottom: 100px;
+}
+
+.btn-ia:hover,
+.btn-historico:hover {
+  background: white;
+  color: black;
+}
+
+
+/* =======================================================
+   🪟 MODAL IA
+======================================================= */
+.modal-ia {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
+/* Quando estiver ativo */
+.modal-ia.active {
+  display: flex;
+}
+
+.modal-content-ia {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  width: 500px;
+  max-width: 95%;
+  height: 600px;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: aparecerIA 0.25s ease;
+}
+
 /* =======================================================
-   CHAT IA
+   💬 CHAT IA
 ======================================================= */
 .chat-ia {
   flex: 1;
@@ -130,37 +234,47 @@ button:hover {
   background: var(--bg-tertiary);
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  scroll-behavior: smooth;
+  font-size: 0.95rem;
 }
 
 .mensagem-user {
   text-align: right;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #dcdcdc;
+  background: #2a3140;
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  max-width: 80%;
 }
 
 .mensagem-ia {
   text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #9fb0ff;
-  line-height: 1.6;
+  background: #1f2530;
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  max-width: 80%;
 }
 
-/* Cursor digitando */
-.mensagem-ia.typing {
-  border-right: 2px solid #9fb0ff;
-  animation: cursorBlink 0.8s infinite;
+/* Animação do modal IA */
+@keyframes aparecerIA {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-@keyframes cursorBlink {
-  0% { border-color: transparent; }
-  50% { border-color: #9fb0ff; }
-  100% { border-color: transparent; }
-}
+/* =========================
+   FOOTER PROFISSIONAL
+========================= */
 
-/* =======================================================
-   FOOTER (igual ao seu original)
-======================================================= */
 .footer {
     position: relative;
     margin-top: 100px;
@@ -170,6 +284,7 @@ button:hover {
     overflow: hidden;
 }
 
+/* Linha animada */
 .footer-line {
     position: absolute;
     top: 0;
@@ -222,6 +337,7 @@ button:hover {
     color: #60a5fa;
 }
 
+/* Responsivo */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
@@ -230,5 +346,62 @@ button:hover {
 
     .footer-right {
         text-align: center;
+    }
+}
+
+/* ================= MODAL LOGOUT ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 16px;
+    width: 320px;
+    text-align: center;
+    animation: aparecer 0.25s ease;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-secundario {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-perigo {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }
