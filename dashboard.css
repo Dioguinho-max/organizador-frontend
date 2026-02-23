@@ -3,15 +3,14 @@
 ======================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
-
 /* =======================================================
    🎨 VARIÁVEIS DE COR (Dark Theme)
-   Facilita mudar cores no futuro
 ======================================================= */
 :root {
-  --bg-primary: #0f1115;      /* Fundo principal */
-  --bg-secondary: #151922;    /* Cards */
-  --bg-tertiary: #1c212c;     /* Inputs */
+  --bg-primary: #0f1115;
+  --bg-secondary: #151922;
+  --bg-tertiary: #1c212c;
+  --bg-card: #151922;
 
   --border-color: #262b36;
 
@@ -21,7 +20,6 @@
   --accent: #ffffff;
 }
 
-
 /* =======================================================
    🔧 RESET GLOBAL
 ======================================================= */
@@ -30,7 +28,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 
 /* =======================================================
    🧱 BASE DA PÁGINA
@@ -42,7 +39,6 @@ body {
   padding: 60px 8%;
 }
 
-
 /* =======================================================
    🏷 TÍTULO PRINCIPAL
 ======================================================= */
@@ -52,7 +48,6 @@ h1 {
   margin-bottom: 40px;
 }
 
-
 /* =======================================================
    📦 CONTAINER CENTRAL
 ======================================================= */
@@ -60,7 +55,6 @@ h1 {
   max-width: 900px;
   margin: auto;
 }
-
 
 /* =======================================================
    🗂 CARDS
@@ -74,7 +68,6 @@ h1 {
   transition: 0.3s ease;
 }
 
-/* Efeito hover suave */
 .card:hover {
   border-color: #333a46;
   transform: translateY(-3px);
@@ -84,7 +77,6 @@ h1 {
   font-family: 'Playfair Display', serif;
   margin-bottom: 20px;
 }
-
 
 /* =======================================================
    📝 INPUTS E SELECT
@@ -108,7 +100,6 @@ select:focus {
   background: #202634;
 }
 
-
 /* =======================================================
    🔘 BOTÕES
 ======================================================= */
@@ -126,7 +117,6 @@ button:hover {
   background: white;
   color: black;
 }
-
 
 /* =======================================================
    📋 LISTA DE TAREFAS
@@ -147,9 +137,8 @@ li.concluida {
   opacity: 0.4;
 }
 
-
 /* =======================================================
-   🏷 BADGE (Nota)
+   🏷 BADGE
 ======================================================= */
 .badge {
   font-size: 0.75rem;
@@ -158,7 +147,6 @@ li.concluida {
   border-radius: 6px;
   color: var(--text-secondary);
 }
-
 
 /* =======================================================
    🤖 BOTÕES FLUTUANTES
@@ -177,20 +165,14 @@ li.concluida {
   transition: 0.3s;
 }
 
-.btn-ia {
-  bottom: 30px;
-}
-
-.btn-historico {
-  bottom: 100px;
-}
+.btn-ia { bottom: 30px; }
+.btn-historico { bottom: 100px; }
 
 .btn-ia:hover,
 .btn-historico:hover {
   background: white;
   color: black;
 }
-
 
 /* =======================================================
    🪟 MODAL IA
@@ -216,7 +198,6 @@ li.concluida {
   flex-direction: column;
 }
 
-
 /* =======================================================
    💬 CHAT IA
 ======================================================= */
@@ -224,28 +205,44 @@ li.concluida {
   flex: 1;
   overflow-y: auto;
   margin: 15px 0;
-  padding: 10px;
+  padding: 15px;
   background: var(--bg-tertiary);
   border-radius: 8px;
   border: 1px solid var(--border-color);
+  scroll-behavior: smooth;
 }
 
 .mensagem-user {
   text-align: right;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #dcdcdc;
 }
 
 .mensagem-ia {
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #9fb0ff;
+  line-height: 1.6;
 }
 
 /* =========================
-   FOOTER PROFISSIONAL
+   ✍️ EFEITO DIGITANDO
 ========================= */
 
+.mensagem-ia.typing {
+  border-right: 2px solid #9fb0ff;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  0% { border-color: transparent; }
+  50% { border-color: #9fb0ff; }
+  100% { border-color: transparent; }
+}
+
+/* =======================================================
+   FOOTER
+======================================================= */
 .footer {
     position: relative;
     margin-top: 100px;
@@ -255,7 +252,6 @@ li.concluida {
     overflow: hidden;
 }
 
-/* Linha animada */
 .footer-line {
     position: absolute;
     top: 0;
@@ -271,57 +267,9 @@ li.concluida {
     100% { left: 100%; }
 }
 
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-left h4 {
-    color: #ffffff;
-    margin-bottom: 5px;
-}
-
-.footer-left p {
-    color: #8b949e;
-    font-size: 0.9rem;
-}
-
-.footer-right {
-    text-align: right;
-}
-
-.footer-right p {
-    color: #6e7681;
-    font-size: 0.85rem;
-    margin: 4px 0;
-}
-
-.footer a {
-    color: #3b82f6;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.footer a:hover {
-    color: #60a5fa;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-right {
-        text-align: center;
-    }
-}
-
-/* ================= MODAL LOGOUT ================= */
-
+/* =======================================================
+   MODAL LOGOUT
+======================================================= */
 .modal {
     display: none;
     position: fixed;
