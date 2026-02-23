@@ -8,8 +8,10 @@ body {
     margin: 0;
     padding: 0;
     color: #e2e8f0;
+    position: relative; /* necessário se usar botão fixo */
 }
 
+/* Container principal */
 .container-termos {
     max-width: 900px;
     margin: 80px auto;
@@ -41,16 +43,20 @@ body {
     color: #cbd5e1;
 }
 
-.container-termos a {
+/* Links normais do texto */
+.container-termos p a {
     color: #38bdf8;
     text-decoration: none;
 }
 
-.container-termos a:hover {
+.container-termos p a:hover {
     text-decoration: underline;
 }
 
-/* Botão voltar */
+/* ============================
+   BOTÃO VOLTAR
+============================ */
+
 .btn-voltar {
     display: inline-block;
     margin-top: 30px;
@@ -63,12 +69,24 @@ body {
     transition: 0.3s ease;
 }
 
+/* Hover do botão */
 .btn-voltar:hover {
     background: #0ea5e9;
     transform: translateY(-2px);
 }
 
-/* Animação */
+/* Se quiser o botão no canto superior esquerdo */
+.btn-voltar.canto {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin-top: 0;
+}
+
+/* ============================
+   ANIMAÇÃO
+============================ */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
