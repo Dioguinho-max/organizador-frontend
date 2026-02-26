@@ -128,6 +128,7 @@ async function carregarTarefas() {
 
     const tarefas = await response.json();
     lista.innerHTML = "";
+    atualizarGraficoColuna(tarefas);
 
     tarefas.forEach(t => {
 
