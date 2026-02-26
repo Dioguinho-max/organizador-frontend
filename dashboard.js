@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const API = "https://organizador-backend-dqxr.onrender.com";
 const token = localStorage.getItem("token");
+    let graficoColuna;
 
 if (!token) {
     window.location.href = "index.html";
@@ -379,6 +380,59 @@ async function carregarHistorico() {
         historicoIA.innerHTML = "Erro ao carregar histórico.";
         console.error(erro);
     }
+}
+
+/* =========================================
+   GRÁFICO DE COLUNAS - TAREFAS POR DIA
+========================================= */
+
+function atualizarGraficoColuna(tarefas) {
+
+    const canvas = document.getElementById("graficoTarefas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    const tarefasPorDia = {};
+
+    tarefas.forEach(t => {
+        const data = t.createdAt
+            ? new Date(t.createdAt).toLocaleDateString()
+            : "Sem data";
+
+        tarefasPorDia[data] = (tarefasPorDia[data] || 0) + 1;
+    });
+
+    const labels = Object.keys(tarefasPorDia);
+    const valores = Object.values(tarefasPorDia);
+
+    if (labels.length === 0) {
+        labels.push("Sem dados");
+        valores.push(0);
+    }
+
+    if (graficoColuna) {
+        graficoColuna.destroy();
+    }
+
+    graficoColuna = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Tarefas criadas",
+                data: valores
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
 
 /* =========================================
