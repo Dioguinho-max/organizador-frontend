@@ -384,7 +384,7 @@ async function carregarHistorico() {
 }
 
 /* =========================================
-   GRÁFICO DE COLUNAS - TAREFAS POR DIA
+   GRÁFICO DE EVOLUÇÃO DAS NOTAS
 ========================================= */
 
 function atualizarGraficoColuna(tarefas) {
@@ -394,42 +394,50 @@ function atualizarGraficoColuna(tarefas) {
 
     const ctx = canvas.getContext("2d");
 
-    const tarefasPorDia = {};
-
-    tarefas.forEach(t => {
-        const data = t.createdAt
-            ? new Date(t.createdAt).toLocaleDateString()
-            : "Sem data";
-
-        tarefasPorDia[data] = (tarefasPorDia[data] || 0) + 1;
-    });
-
-    const labels = Object.keys(tarefasPorDia);
-    const valores = Object.values(tarefasPorDia);
-
-    if (labels.length === 0) {
-        labels.push("Sem dados");
-        valores.push(0);
-    }
-
     if (graficoColuna) {
         graficoColuna.destroy();
     }
 
+    // Pega apenas tarefas que têm nota
+    const tarefasComNota = tarefas.filter(t => t.nota !== null);
+
+    const labels = [];
+    const valores = [];
+
+    tarefasComNota.forEach((t, index) => {
+        labels.push(`Tarefa ${index + 1}`);
+        valores.push(t.nota);
+    });
+
+    if (labels.length === 0) {
+        labels.push("Sem notas");
+        valores.push(0);
+    }
+
     graficoColuna = new Chart(ctx, {
-        type: "bar",
+        type: "line", // curva 📈
         data: {
             labels: labels,
             datasets: [{
-                label: "Tarefas criadas",
-                data: valores
+                label: "Evolução das Notas",
+                data: valores,
+                tension: 0.4,       // deixa curva suave
+                borderWidth: 3,
+                pointRadius: 5,
+                fill: false
             }]
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: 10
                 }
             }
         }
