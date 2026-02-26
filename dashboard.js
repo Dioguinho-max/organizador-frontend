@@ -415,13 +415,13 @@ function atualizarGraficoColuna(tarefas) {
     }
 
     graficoColuna = new Chart(ctx, {
-        type: "line", // curva 📈
+        type: "line",
         data: {
             labels: labels,
             datasets: [{
                 label: "Evolução das Notas",
                 data: valores,
-                tension: 0.4,       // deixa curva suave
+                tension: 0.4,
                 borderWidth: 3,
                 pointRadius: 5,
                 fill: false
@@ -437,7 +437,12 @@ function atualizarGraficoColuna(tarefas) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 10
+                    suggestedMax: valores.length > 0
+                        ? Math.max(...valores) + 1
+                        : 10,
+                    ticks: {
+                        stepSize: 1
+                    }
                 }
             }
         }
