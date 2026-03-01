@@ -15,7 +15,7 @@ https://organizador-frontend.vercel.app/
 
 ## 🎥 Demonstração
 
-![Demonstração do sistema](./demo.gif)
+![Demonstração do sistema](./demo1.gif)
 
 ---
 
