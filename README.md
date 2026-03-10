@@ -74,8 +74,3 @@ Resultado exibido diretamente na interface.
 
 Controle de limite diário aplicado pelo backend.
 
----
-## 🌐 Integração com Backend
-
-A aplicação consome a seguinte API:
-
