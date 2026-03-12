@@ -352,9 +352,10 @@ li.concluida {
   min-height: 300px; /* gráfico maior */
 }
 
-/* ================================
-   FOOTER ANTIGO
-=============================== */
+
+/* =========================
+   FOOTER PROFISSIONAL
+========================= */
 .footer {
     position: relative;
     margin-top: 100px;
@@ -417,39 +418,14 @@ li.concluida {
     color: #60a5fa;
 }
 
-/* ================================
-   RESPONSIVO
-=============================== */
+/* Responsivo */
 @media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
 
-  .navbar nav {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .btn-floating.btn-ia {
-      bottom: 120px;
-  }
-
-  .btn-floating.btn-historico {
-      bottom: 190px;
-  }
-
-  body {
-      padding-bottom: 260px;
-  }
-
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-right {
-    text-align: center;
-  }
+    .footer-right {
+        text-align: center;
+    }
 }
