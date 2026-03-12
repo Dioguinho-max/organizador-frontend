@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
 /* ================================
-   VARIÁVEIS
+   VARIÁVEIS DE COR
 =============================== */
 :root {
   --bg-primary: #0f1115;
@@ -19,7 +19,11 @@
 /* ================================
    RESET
 =============================== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* ================================
    BODY
@@ -30,6 +34,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  padding-bottom: 60px; /* espaço para footer */
 }
 
 /* ================================
@@ -75,10 +80,9 @@ body {
   margin: 30px auto;
   padding: 0 5%;
   display: grid;
-  /* Agora garante que os cards centralizem mesmo com poucos */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
-  justify-items: center;
+  justify-items: center; /* centraliza cards quando há poucos */
 }
 
 /* ================================
@@ -90,14 +94,19 @@ body {
   border-radius: 12px;
   border: 1px solid var(--border-color);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: 0.3s ease;
   width: 100%;
-  max-width: 450px; /* mais consistente */
+  max-width: 400px; /* tamanho uniforme */
+  transition: 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
   border-color: var(--accent);
+}
+
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 15px;
 }
 
 /* ================================
@@ -143,11 +152,9 @@ button:hover,
 /* BOTÕES FLUTUANTES */
 .btn-floating {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  border-radius: 50%;
   width: 55px;
   height: 55px;
-  border-radius: 50%;
   font-size: 1.3rem;
   display: flex;
   justify-content: center;
@@ -164,14 +171,22 @@ button:hover,
   background: #60a5fa;
 }
 
+.btn-floating.btn-ia {
+  bottom: 30px;
+  right: 30px;
+}
+
 .btn-floating.btn-historico {
   bottom: 100px;
+  right: 30px;
 }
 
 /* ================================
    LISTAS DE TAREFAS
 =============================== */
-ul { list-style: none; width: 100%; }
+ul {
+  list-style: none;
+}
 
 li {
   padding: 12px;
@@ -182,7 +197,18 @@ li {
   border-radius: 6px;
 }
 
-li.concluida { opacity: 0.4; }
+li.concluida {
+  opacity: 0.4;
+}
+
+/* BADGES */
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
 
 /* ================================
    MODAL IA & HISTÓRICO
@@ -197,7 +223,9 @@ li.concluida { opacity: 0.4; }
   z-index: 1000;
 }
 
-.modal-ia.active { display: flex; }
+.modal-ia.active {
+  display: flex;
+}
 
 .modal-content-ia {
   background: var(--bg-secondary);
@@ -210,8 +238,13 @@ li.concluida { opacity: 0.4; }
   flex-direction: column;
 }
 
-.modal-header { display: flex; justify-content: space-between; align-items: center; }
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+/* CHAT IA */
 .chat-ia {
   flex: 1;
   overflow-y: auto;
@@ -256,51 +289,8 @@ li.concluida { opacity: 0.4; }
   border: 1px solid var(--border-color);
   box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   width: 100%;
-  height: 400px; /* agora maior e legível */
+  height: 400px; /* maior e legível */
 }
-
-/* ================================
-   FOOTER ANIMADO (ANTIGO)
-=============================== */
-.footer {
-  position: relative;
-  margin-top: 100px;
-  padding: 30px 5%;
-  background: #0d1117;
-  border-top: 1px solid #1f2937;
-  overflow: hidden;
-}
-
-.footer-line {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-  animation: slide 4s linear infinite;
-}
-
-@keyframes slide {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-left h4 { color: #fff; margin-bottom: 5px; }
-.footer-left p { color: #8b949e; font-size: 0.9rem; }
-
-.footer-right { text-align: right; }
-.footer-right p { color: #6e7681; font-size: 0.85rem; margin: 4px 0; }
-
-.footer a { color: #3b82f6; text-decoration: none; transition: 0.3s; }
-.footer a:hover { color: #60a5fa; }
 
 /* ================================
    MODAL LOGOUT
@@ -348,9 +338,89 @@ li.concluida { opacity: 0.4; }
 }
 
 /* ================================
-   RESPONSIVO
+   FOOTER ANTIGO ANIMADO
 =============================== */
+.footer {
+    position: relative;
+    margin-top: 100px;
+    padding: 30px 8%;
+    background: #0d1117;
+    border-top: 1px solid #1f2937;
+    overflow: hidden;
+}
+
+/* Linha animada */
+.footer-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    animation: slide 4s linear infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.footer-left p {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    color: #6e7681;
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+}
+
+/* RESPONSIVO */
 @media (max-width: 768px) {
-  .container { grid-template-columns: 1fr; }
-  .navbar nav { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar nav {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .footer-right {
+      text-align: center;
+  }
 }
