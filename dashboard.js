@@ -19,8 +19,9 @@ const cancelarLogout = document.getElementById("cancelarLogout");
 const confirmarLogout = document.getElementById("confirmarLogout");
 
 // Abrir modal
-if (btnSair) {
-    btnSair.addEventListener("click", () => {
+if (btnSair && modalLogout) {
+    btnSair.addEventListener("click", (e) => {
+        e.preventDefault(); // evita que o link "#" role a página
         modalLogout.style.display = "flex";
     });
 }
