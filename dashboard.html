@@ -3,63 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard | Organizador de Estudos</title>
-
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
-<!-- SIDEBAR FIXA -->
-<aside class="sidebar">
-    <h2>📚 Organizador</h2>
-    <nav>
-        <a href="#dashboard-section">🏠 Dashboard</a>
-        <a href="#tarefas-section">📝 Tarefas</a>
-        <a href="#ranking-section">🏆 Ranking</a>
-        <a href="#desempenho-section">📈 Desempenho</a>
-        <a href="#ia-section">🤖 Plano IA</a>
-        <a href="#historico-section">📜 Histórico IA</a>
-        <a href="#" id="btnSair">🚪 Sair</a>
-    </nav>
-</aside>
+<div class="layout-container">
 
-<!-- CONTEÚDO PRINCIPAL -->
-<main class="main-content">
+    <!-- SIDEBAR LATERAL ESTÁTICA -->
+    <aside class="sidebar">
+        <h2>📚 Organizador</h2>
+        <nav>
+            <a href="#dashboard-section">🏠 Dashboard</a>
+            <a href="#tarefas-section">📝 Tarefas</a>
+            <a href="#ranking-section">🏆 Ranking</a>
+            <a href="#desempenho-section">📈 Desempenho</a>
+            <a href="#ia-section">🤖 Plano IA</a>
+            <a href="#historico-section">📜 Histórico IA</a>
+            <a href="#" id="btnSair">🚪 Sair</a>
+        </nav>
+    </aside>
 
-    <section id="dashboard-section">
-        <h1>📚 Minha Dashboard</h1>
-    </section>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
 
-    <!-- NOVA TAREFA -->
-    <section id="tarefas-section" class="card">
-        <h2>Nova Tarefa</h2>
+        <section id="dashboard-section">
+            <h1>📚 Minha Dashboard</h1>
+        </section>
 
-        <input type="text" id="novaTarefa" placeholder="Digite uma tarefa...">
-        <input type="text" id="descricaoTarefa" placeholder="Descrição (opcional)">
-        <input type="number" id="notaTarefa" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1">
+        <!-- NOVA TAREFA -->
+        <section id="tarefas-section" class="card">
+            <h2>Nova Tarefa</h2>
+            <input type="text" id="novaTarefa" placeholder="Digite uma tarefa...">
+            <input type="text" id="descricaoTarefa" placeholder="Descrição (opcional)">
+            <input type="number" id="notaTarefa" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1">
+            <button id="btnCriarTarefa">Adicionar</button>
+        </section>
 
-        <button id="btnCriarTarefa">Adicionar</button>
-    </section>
+        <!-- MINHAS TAREFAS -->
+        <section class="card">
+            <h2>Minhas Tarefas</h2>
+            <ul id="listaTarefas"></ul>
+        </section>
 
-    <!-- MINHAS TAREFAS -->
-    <section class="card">
-        <h2>Minhas Tarefas</h2>
-        <ul id="listaTarefas"></ul>
-    </section>
+        <!-- RANKING -->
+        <section id="ranking-section" class="card">
+            <h2>🏆 Ranking</h2>
+            <ul id="listaRanking"></ul>
+        </section>
 
-    <!-- RANKING -->
-    <section id="ranking-section" class="card">
-        <h2>🏆 Ranking</h2>
-        <ul id="listaRanking"></ul>
-    </section>
+        <!-- DESEMPENHO -->
+        <section id="desempenho-section" class="card">
+            <h2>📈 Desempenho</h2>
+            <canvas id="graficoTarefas"></canvas>
+        </section>
 
-    <!-- DESEMPENHO -->
-    <section id="desempenho-section" class="card">
-        <h2>📈 Desempenho</h2>
-        <canvas id="graficoTarefas"></canvas>
-    </section>
+    </main>
 
-</main>
+</div>
 
 <!-- BOTÕES FLUTUANTES -->
 <button id="btnIA" class="btn-ia">🤖</button>
@@ -72,9 +73,7 @@
       <h3>Assistente IA</h3>
       <button id="fecharIA">X</button>
     </div>
-
     <div id="chatIA" class="chat-ia"></div>
-
     <div class="input-area-ia coluna">
       <input type="text" id="materiaIA" placeholder="Matéria (ex: Matemática)">
       <select id="nivelIA">
