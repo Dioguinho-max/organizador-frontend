@@ -1,121 +1,117 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard | Organizador de Estudos</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="stylesheet" href="dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Organizador</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
 </head>
 <body>
 
-  <!-- NAVBAR SUPERIOR -->
-  <header class="navbar">
-    <h1>📚 Organizador de Estudos</h1>
-    <nav>
-      <a href="#tarefas-section">📝 Tarefas</a>
-      <a href="#ranking-section">🏆 Ranking</a>
-      <a href="#desempenho-section">📈 Desempenho</a>
-      <a href="#ia-section">🤖 IA</a>
-      <a href="#historico-section">📜 Histórico</a>
-      <button id="btnSair" class="btn-sair">🚪 Sair</button>
-    </nav>
-  </header>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <h1>📚 Organizador</h1>
+        <nav>
+            <a href="#">🏠 Dashboard</a>
+            <a href="#tarefas-section">📝 Tarefas</a>
+            <a href="#ranking-section">🏆 Ranking</a>
+            <a href="#desempenho-section">📈 Desempenho</a>
+            <a href="#ia-section">🤖 Plano IA</a>
+            <a href="#historico-section">📜 Histórico IA</a>
+            <button id="btnSair">🚪 Sair</button>
+        </nav>
+    </header>
 
-  <!-- CONTAINER PRINCIPAL -->
-  <main class="container">
+    <!-- CONTAINER PRINCIPAL -->
+    <main class="container">
 
-    <!-- NOVA TAREFA -->
-    <section id="tarefas-section" class="card">
-      <h2>➕ Nova Tarefa</h2>
-      <input type="text" id="novaTarefa" placeholder="Digite uma tarefa...">
-      <input type="text" id="descricaoTarefa" placeholder="Descrição (opcional)">
-      <input type="number" id="notaTarefa" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1">
-      <button id="btnCriarTarefa" class="btn-primary">Adicionar</button>
-    </section>
+        <!-- CARDS -->
+        <div class="card">
+            <h2>Tarefas Pendentes</h2>
+            <ul id="listaTarefas"></ul>
+        </div>
 
-    <!-- MINHAS TAREFAS -->
-    <section id="tarefas-list-section" class="card">
-      <h2>📝 Minhas Tarefas</h2>
-      <ul id="listaTarefas"></ul>
-    </section>
+        <div class="card">
+            <h2>Ranking</h2>
+            <ul id="listaRanking"></ul>
+        </div>
 
-    <!-- RANKING -->
-    <section id="ranking-section" class="card">
-      <h2>🏆 Ranking</h2>
-      <ul id="listaRanking"></ul>
-    </section>
+        <div class="card" id="grafico-card">
+            <h2>Desempenho</h2>
+            <canvas id="graficoTarefas"></canvas>
+        </div>
 
-    <!-- DESEMPENHO -->
-    <section id="desempenho-section" class="card">
-      <h2>📈 Desempenho</h2>
-      <canvas id="graficoTarefas"></canvas>
-    </section>
+        <div class="card" id="ia-card">
+            <h2>Plano de Estudos IA</h2>
+            <p>Use os botões flutuantes à direita para abrir a IA ou o histórico.</p>
+        </div>
 
-  </main>
+    </main>
 
-  <!-- BOTÕES FLUTUANTES -->
-  <button id="btnIA" class="btn-floating">🤖</button>
-  <button id="btnHistoricoIA" class="btn-floating btn-historico">📜</button>
+    <!-- BOTÕES FLUTUANTES -->
+    <button class="btn-floating btn-ia" id="btnIA">🤖</button>
+    <button class="btn-floating btn-historico" id="btnHistoricoIA">📜</button>
 
-  <!-- MODAL IA -->
-  <div id="modalIA" class="modal-ia">
-    <div class="modal-content-ia">
-      <div class="modal-header">
-        <h3>Assistente IA</h3>
-        <button id="fecharIA">✖</button>
-      </div>
-      <div id="chatIA" class="chat-ia"></div>
-      <div class="input-area-ia">
-        <input type="text" id="materiaIA" placeholder="Matéria (ex: Matemática)">
-        <select id="nivelIA">
-          <option value="">Selecione o nível</option>
-          <option value="iniciante">Iniciante</option>
-          <option value="intermediário">Intermediário</option>
-          <option value="avançado">Avançado</option>
-        </select>
-        <input type="number" id="horasIA" placeholder="Horas por dia" min="1" max="24">
-        <button id="enviarIA" class="btn-primary">Gerar Plano</button>
-      </div>
+    <!-- MODAL IA -->
+    <div class="modal-ia" id="modalIA">
+        <div class="modal-content-ia">
+            <div class="modal-header">
+                <h3>Plano IA</h3>
+                <button id="fecharIA">✖</button>
+            </div>
+            <div class="chat-ia" id="chatIA"></div>
+            <div>
+                <input type="text" id="materiaIA" placeholder="Matéria">
+                <select id="nivelIA">
+                    <option value="">Nível</option>
+                    <option value="Iniciante">Iniciante</option>
+                    <option value="Intermediário">Intermediário</option>
+                    <option value="Avançado">Avançado</option>
+                </select>
+                <input type="number" id="horasIA" placeholder="Horas por dia">
+                <button class="btn-primary" id="enviarIA">Gerar Plano</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- MODAL HISTÓRICO -->
-  <div id="modalHistoricoIA" class="modal-ia">
-    <div class="modal-content-ia">
-      <div class="modal-header">
-        <h3>Histórico IA</h3>
-        <button id="fecharHistoricoIA">✖</button>
-      </div>
-      <div id="historicoIA" class="chat-ia"></div>
+    <!-- MODAL HISTÓRICO IA -->
+    <div class="modal-ia" id="modalHistoricoIA">
+        <div class="modal-content-ia">
+            <div class="modal-header">
+                <h3>Histórico IA</h3>
+                <button id="fecharHistoricoIA">✖</button>
+            </div>
+            <div class="chat-ia" id="historicoIA"></div>
+        </div>
     </div>
-  </div>
 
-  <!-- MODAL LOGOUT -->
-  <div id="modalLogout" class="modal">
-    <div class="modal-box">
-      <h3>Confirmar saída</h3>
-      <p>Tem certeza que deseja sair?</p>
-      <div class="modal-actions">
-        <button id="cancelarLogout" class="btn-secundario">Cancelar</button>
-        <button id="confirmarLogout" class="btn-perigo">Sair</button>
-      </div>
+    <!-- MODAL LOGOUT -->
+    <div class="modal" id="modalLogout">
+        <div class="modal-box">
+            <p>Tem certeza que deseja sair?</p>
+            <div class="modal-actions">
+                <button class="btn-secundario" id="cancelarLogout">Cancelar</button>
+                <button class="btn-perigo" id="confirmarLogout">Sair</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div>
-        <h4>📚 Organizador de Estudos</h4>
-        <p>Planeje. Execute. Evolua.</p>
-      </div>
-      <div>
-        <p>Versão 1.0.5 | © <span id="anoAtual"></span> Dioguinho-max</p>
-      </div>
-    </div>
-  </footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-line"></div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4>Organizador</h4>
+                <p>Seu dashboard de estudos e produtividade.</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2026 Organizador. Todos os direitos reservados.</p>
+                <p><a href="#">Política de Privacidade</a></p>
+                <p><a href="#">Termos de Uso</a></p>
+            </div>
+        </div>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="dashboard.js"></script>
 </body>
 </html>
