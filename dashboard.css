@@ -421,44 +421,55 @@ li.concluida {
   max-width: 100%;
 }
 
-/* Sidebar fixa */
+/* Layout principal */
+.layout-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sidebar lateral estática */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;      /* largura fixa da sidebar */
-  height: 100vh;
-  background: var(--bg-secondary);
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  z-index: 100;       /* fica acima do conteúdo */
+    flex: 0 0 220px;
+    background: #151922;
+    color: #f5f5f5;
+    padding: 20px;
+    border-radius: 12px;
 }
 
-/* Espaçamento interno */
-.main {
-  margin-left: 240px;  /* garante que conteúdo não fique embaixo da sidebar */
-  padding: 30px;
-}
-
-/* Sidebar links */
 .sidebar h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 .sidebar nav a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 10px 8px;
-  border-radius: 8px;
-  transition: 0.2s;
-  display: block;
+    display: block;
+    padding: 10px 8px;
+    color: #f5f5f5;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: 0.2s;
 }
 
 .sidebar nav a:hover {
-  background: #3b3f51;
-  color: var(--accent);
+    background: #1c212c;
+}
+
+/* Conteúdo principal */
+.main-content {
+    flex: 1;
+}
+
+/* Responsivo: sidebar some em telas pequenas */
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        flex: none;
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
