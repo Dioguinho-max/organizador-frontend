@@ -1,218 +1,212 @@
-/* =======================================================
-   🎨 IMPORTAÇÃO DE FONTES
-======================================================= */
+/* ================================
+   FONTES
+=============================== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
-
-/* =======================================================
-   🎨 VARIÁVEIS DE COR (Dark Theme)
-   Facilita mudar cores no futuro
-======================================================= */
+/* ================================
+   VARIÁVEIS
+=============================== */
 :root {
-  --bg-primary: #0f1115;      /* Fundo principal */
-  --bg-secondary: #151922;    /* Cards */
-  --bg-tertiary: #1c212c;     /* Inputs */
-
+  --bg-primary: #0f1115;
+  --bg-secondary: #151922;
+  --bg-tertiary: #1c212c;
   --border-color: #262b36;
-
   --text-primary: #f5f5f5;
   --text-secondary: #a0a7b5;
-
-  --accent: #ffffff;
+  --accent: #3b82f6;
 }
 
-
-/* =======================================================
-   🔧 RESET GLOBAL
-======================================================= */
+/* ================================
+   RESET
+=============================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-/* =======================================================
-   🧱 BASE DA PÁGINA
-======================================================= */
+/* ================================
+   BODY
+=============================== */
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
-  padding: 60px 8%;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
+/* ================================
+   NAVBAR
+=============================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
 
-/* =======================================================
-   🏷 TÍTULO PRINCIPAL
-======================================================= */
-h1 {
+.navbar h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  margin-bottom: 40px;
+  font-size: 1.8rem;
 }
 
+.navbar nav a,
+.navbar nav button {
+  margin-left: 15px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-/* =======================================================
-   📦 CONTAINER CENTRAL
-======================================================= */
+.navbar nav a:hover,
+.navbar nav button:hover {
+  color: var(--accent);
+}
+
+/* ================================
+   CONTAINER PRINCIPAL
+=============================== */
 .container {
-  max-width: 900px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
 }
 
-
-/* =======================================================
-   🗂 CARDS
-======================================================= */
+/* ================================
+   CARDS
+=============================== */
 .card {
   background: var(--bg-secondary);
-  padding: 40px;
-  border: 1px solid var(--border-color);
-  margin-bottom: 30px;
+  padding: 25px;
   border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   transition: 0.3s ease;
 }
 
-/* Efeito hover suave */
 .card:hover {
-  border-color: #333a46;
   transform: translateY(-3px);
+  border-color: var(--accent);
 }
 
-.card h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 20px;
-}
-
-
-/* =======================================================
-   📝 INPUTS E SELECT
-======================================================= */
+/* ================================
+   INPUTS & SELECT
+=============================== */
 input,
 select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  outline: none;
+  padding: 10px;
+  margin-bottom: 12px;
   border-radius: 8px;
-  transition: 0.3s;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 input:focus,
 select:focus {
-  border-color: #3a4252;
-  background: #202634;
+  border-color: var(--accent);
+  outline: none;
 }
 
-
-/* =======================================================
-   🔘 BOTÕES
-======================================================= */
-button {
-  padding: 10px 20px;
-  border: 1px solid var(--border-color);
-  background: transparent;
-  color: var(--text-primary);
-  cursor: pointer;
+/* ================================
+   BOTÕES
+=============================== */
+button,
+.btn-primary {
+  padding: 10px 18px;
   border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
   transition: 0.3s;
 }
 
-button:hover {
-  background: white;
-  color: black;
+button:hover,
+.btn-primary:hover {
+  background: #60a5fa;
 }
 
+/* BOTÕES FLUTUANTES */
+.btn-floating {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  transition: 0.3s;
+}
 
-/* =======================================================
-   📋 LISTA DE TAREFAS
-======================================================= */
+.btn-floating:hover {
+  background: #60a5fa;
+}
+
+.btn-floating.btn-historico {
+  bottom: 100px;
+}
+
+/* ================================
+   LISTAS DE TAREFAS
+=============================== */
 ul {
   list-style: none;
 }
 
 li {
-  padding: 15px 0;
+  padding: 12px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 6px;
 }
 
 li.concluida {
   opacity: 0.4;
 }
 
-
-/* =======================================================
-   🏷 BADGE (Nota)
-======================================================= */
-.badge {
-  font-size: 0.75rem;
-  padding: 4px 8px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-secondary);
-}
-
-
-/* =======================================================
-   🤖 BOTÕES FLUTUANTES
-======================================================= */
-.btn-ia,
-.btn-historico {
-  position: fixed;
-  right: 30px;
-  border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn-ia {
-  bottom: 30px;
-}
-
-.btn-historico {
-  bottom: 100px;
-}
-
-.btn-ia:hover,
-.btn-historico:hover {
-  background: white;
-  color: black;
-}
-
-
-/* =======================================================
-   🪟 MODAL IA
-======================================================= */
+/* ================================
+   MODAL IA & HISTÓRICO
+=============================== */
 .modal-ia {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Quando estiver ativo */
 .modal-ia.active {
   display: flex;
 }
 
 .modal-content-ia {
   background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
   width: 500px;
   max-width: 95%;
   height: 600px;
@@ -220,12 +214,14 @@ li.concluida {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  animation: aparecerIA 0.25s ease;
 }
 
-/* =======================================================
-   💬 CHAT IA
-======================================================= */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .chat-ia {
   flex: 1;
   overflow-y: auto;
@@ -244,8 +240,8 @@ li.concluida {
   background: #2a3140;
   padding: 8px 12px;
   border-radius: 12px;
-  display: inline-block;
   max-width: 80%;
+  display: inline-block;
 }
 
 .mensagem-ia {
@@ -255,221 +251,90 @@ li.concluida {
   background: #1f2530;
   padding: 8px 12px;
   border-radius: 12px;
-  display: inline-block;
   max-width: 80%;
+  display: inline-block;
 }
 
-/* Animação do modal IA */
-@keyframes aparecerIA {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* =========================
-   FOOTER PROFISSIONAL
-========================= */
-
+/* ================================
+   FOOTER
+=============================== */
 .footer {
-    position: relative;
-    margin-top: 100px;
-    padding: 30px 8%;
-    background: #0d1117;
-    border-top: 1px solid #1f2937;
-    overflow: hidden;
+  margin-top: 60px;
+  padding: 20px 5%;
+  background: var(--bg-secondary);
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
-/* Linha animada */
-.footer-line {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-    animation: slide 4s linear infinite;
-}
-
-@keyframes slide {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-left h4 {
-    color: #ffffff;
-    margin-bottom: 5px;
-}
-
-.footer-left p {
-    color: #8b949e;
-    font-size: 0.9rem;
-}
-
-.footer-right {
-    text-align: right;
-}
-
-.footer-right p {
-    color: #6e7681;
-    font-size: 0.85rem;
-    margin: 4px 0;
-}
-
-.footer a {
-    color: #3b82f6;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.footer a:hover {
-    color: #60a5fa;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-right {
-        text-align: center;
-    }
-}
-
-/* ================= MODAL LOGOUT ================= */
-
+/* ================================
+   MODAL LOGOUT
+=============================== */
 .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .modal-box {
-    background: var(--bg-card);
-    padding: 25px;
-    border-radius: 16px;
-    width: 320px;
-    text-align: center;
-    animation: aparecer 0.25s ease;
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
 }
 
 .modal-actions {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-secundario {
-    background: #555;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
+  background: #555;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .btn-perigo {
-    background: #e53935;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-@keyframes aparecer {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* =======================================================
-   📈 GRÁFICOS DE DESEMPENHO
-======================================================= */
-
-#graficoTarefas,
-#graficoNotas {
-  margin-top: 25px;
+/* ================================
+   GRÁFICOS
+=============================== */
+#graficoTarefas {
+  margin-top: 15px;
   background: var(--bg-tertiary);
-  padding: 20px;
+  padding: 15px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  max-width: 100%;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
 
-/* Layout principal */
-.layout-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Sidebar lateral estática */
-.sidebar {
-    flex: 0 0 220px;
-    background: #151922;
-    color: #f5f5f5;
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.sidebar h2 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.sidebar nav a {
-    display: block;
-    padding: 10px 8px;
-    color: #f5f5f5;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 6px;
-    transition: 0.2s;
-}
-
-.sidebar nav a:hover {
-    background: #1c212c;
-}
-
-/* Conteúdo principal */
-.main-content {
-    flex: 1;
-}
-
-/* Responsivo: sidebar some em telas pequenas */
+/* RESPONSIVO */
 @media (max-width: 768px) {
-    .layout-container {
-        flex-direction: column;
-    }
-    .sidebar {
-        flex: none;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar nav {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
