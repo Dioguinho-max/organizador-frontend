@@ -19,11 +19,7 @@
 /* ================================
    RESET
 =============================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ================================
    BODY
@@ -79,8 +75,10 @@ body {
   margin: 30px auto;
   padding: 0 5%;
   display: grid;
+  /* Agora garante que os cards centralizem mesmo com poucos */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 25px;
+  justify-items: center;
 }
 
 /* ================================
@@ -93,6 +91,8 @@ body {
   border: 1px solid var(--border-color);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   transition: 0.3s ease;
+  width: 100%;
+  max-width: 450px; /* mais consistente */
 }
 
 .card:hover {
@@ -171,9 +171,7 @@ button:hover,
 /* ================================
    LISTAS DE TAREFAS
 =============================== */
-ul {
-  list-style: none;
-}
+ul { list-style: none; width: 100%; }
 
 li {
   padding: 12px;
@@ -184,9 +182,7 @@ li {
   border-radius: 6px;
 }
 
-li.concluida {
-  opacity: 0.4;
-}
+li.concluida { opacity: 0.4; }
 
 /* ================================
    MODAL IA & HISTÓRICO
@@ -201,9 +197,7 @@ li.concluida {
   z-index: 1000;
 }
 
-.modal-ia.active {
-  display: flex;
-}
+.modal-ia.active { display: flex; }
 
 .modal-content-ia {
   background: var(--bg-secondary);
@@ -216,11 +210,7 @@ li.concluida {
   flex-direction: column;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+.modal-header { display: flex; justify-content: space-between; align-items: center; }
 
 .chat-ia {
   flex: 1;
@@ -256,79 +246,61 @@ li.concluida {
 }
 
 /* ================================
-   FOOTER
+   GRÁFICOS
 =============================== */
-.footer {
-    position: relative;
-    padding: 30px 8%;
-    background: #0d1117;
-    border-top: 1px solid #1f2937;
-    overflow: hidden;
+#graficoTarefas {
+  margin-top: 25px;
+  background: var(--bg-tertiary);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  width: 100%;
+  height: 400px; /* agora maior e legível */
 }
 
-/* Linha animada */
+/* ================================
+   FOOTER ANIMADO (ANTIGO)
+=============================== */
+.footer {
+  position: relative;
+  margin-top: 100px;
+  padding: 30px 5%;
+  background: #0d1117;
+  border-top: 1px solid #1f2937;
+  overflow: hidden;
+}
+
 .footer-line {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-    animation: slide 4s linear infinite;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  animation: slide 4s linear infinite;
 }
 
 @keyframes slide {
-    0% { left: -100%; }
-    100% { left: 100%; }
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.footer-left h4 {
-    color: #ffffff;
-    margin-bottom: 5px;
-}
+.footer-left h4 { color: #fff; margin-bottom: 5px; }
+.footer-left p { color: #8b949e; font-size: 0.9rem; }
 
-.footer-left p {
-    color: #8b949e;
-    font-size: 0.9rem;
-}
+.footer-right { text-align: right; }
+.footer-right p { color: #6e7681; font-size: 0.85rem; margin: 4px 0; }
 
-.footer-right {
-    text-align: right;
-}
-
-.footer-right p {
-    color: #6e7681;
-    font-size: 0.85rem;
-    margin: 4px 0;
-}
-
-.footer a {
-    color: #3b82f6;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.footer a:hover {
-    color: #60a5fa;
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-right {
-        text-align: center;
-    }
-}
+.footer a { color: #3b82f6; text-decoration: none; transition: 0.3s; }
+.footer a:hover { color: #60a5fa; }
 
 /* ================================
    MODAL LOGOUT
@@ -376,27 +348,9 @@ li.concluida {
 }
 
 /* ================================
-   GRÁFICOS
+   RESPONSIVO
 =============================== */
-#graficoTarefas {
-  margin-top: 15px;
-  background: var(--bg-tertiary);
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-}
-
-/* RESPONSIVO */
 @media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-
-  .navbar nav {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  .container { grid-template-columns: 1fr; }
+  .navbar nav { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
 }
