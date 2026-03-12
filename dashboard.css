@@ -1,98 +1,78 @@
-/* ================================
-   FONTES
-=============================== */
+/* =======================================================
+   🎨 IMPORTAÇÃO DE FONTES
+======================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap');
 
-/* ================================
-   VARIÁVEIS
-=============================== */
+/* =======================================================
+   🎨 VARIÁVEIS DE COR (Dark Theme)
+======================================================= */
 :root {
-  --bg-primary: #0f1115;
-  --bg-secondary: #151922;
-  --bg-tertiary: #1c212c;
+  --bg-primary: #0f1115;      /* Fundo principal */
+  --bg-secondary: #151922;    /* Cards */
+  --bg-tertiary: #1c212c;     /* Inputs */
+
   --border-color: #262b36;
+
   --text-primary: #f5f5f5;
   --text-secondary: #a0a7b5;
-  --accent: #3b82f6;
+
+  --accent: #ffffff;
 }
 
-/* ================================
-   RESET
-=============================== */
+/* =======================================================
+   🔧 RESET GLOBAL
+======================================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ================================
-   BODY
-=============================== */
+/* =======================================================
+   🧱 BASE DA PÁGINA
+======================================================= */
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.6;
-  min-height: 100vh;
+  padding: 60px 5%;
 }
 
-/* ================================
-   NAVBAR
-=============================== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: wrap;
-}
-
-.navbar h1 {
+/* =======================================================
+   🏷 TÍTULO PRINCIPAL
+======================================================= */
+h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.navbar nav a,
-.navbar nav button {
-  margin-left: 15px;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-weight: 500;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.navbar nav a:hover,
-.navbar nav button:hover {
-  color: var(--accent);
-}
-
-/* ================================
-   CONTAINER PRINCIPAL
-=============================== */
+/* =======================================================
+   📦 CONTAINER PRINCIPAL (GRID RESPONSIVO)
+======================================================= */
 .container {
   max-width: 1200px;
   margin: 30px auto;
-  padding: 0 5%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 25px;
+  justify-items: center; /* centraliza quando poucos cards */
+  padding: 0 5%;
 }
 
-/* ================================
-   CARDS
-=============================== */
+/* =======================================================
+   🗂 CARDS
+======================================================= */
 .card {
   background: var(--bg-secondary);
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   transition: 0.3s ease;
+  width: 100%;
+  max-width: 500px;
 }
 
 .card:hover {
@@ -100,102 +80,122 @@ body {
   border-color: var(--accent);
 }
 
-/* ================================
-   INPUTS & SELECT
-=============================== */
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+}
+
+/* =======================================================
+   📝 INPUTS E SELECT
+======================================================= */
 input,
 select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  padding: 12px;
+  margin-bottom: 15px;
   background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
+  outline: none;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
 input:focus,
 select:focus {
-  border-color: var(--accent);
-  outline: none;
+  border-color: #3a4252;
+  background: #202634;
 }
 
-/* ================================
-   BOTÕES
-=============================== */
-button,
-.btn-primary {
-  padding: 10px 18px;
+/* =======================================================
+   🔘 BOTÕES
+======================================================= */
+button {
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
   border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 500;
   transition: 0.3s;
 }
 
-button:hover,
-.btn-primary:hover {
-  background: #60a5fa;
+button:hover {
+  background: white;
+  color: black;
 }
 
-/* BOTÕES FLUTUANTES */
-.btn-floating {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  font-size: 1.3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-  transition: 0.3s;
-}
-
-.btn-floating:hover {
-  background: #60a5fa;
-}
-
-.btn-floating.btn-historico {
-  bottom: 100px;
-}
-
-/* ================================
-   LISTAS DE TAREFAS
-=============================== */
+/* =======================================================
+   📋 LISTA DE TAREFAS
+======================================================= */
 ul {
   list-style: none;
+  width: 100%;
 }
 
 li {
-  padding: 12px;
+  padding: 15px 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 6px;
 }
 
 li.concluida {
   opacity: 0.4;
 }
 
-/* ================================
-   MODAL IA & HISTÓRICO
-=============================== */
+/* =======================================================
+   🏷 BADGE (Nota)
+======================================================= */
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+}
+
+/* =======================================================
+   🤖 BOTÕES FLUTUANTES
+======================================================= */
+.btn-ia,
+.btn-historico {
+  position: fixed;
+  right: 30px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.btn-ia {
+  bottom: 30px;
+}
+
+.btn-historico {
+  bottom: 100px;
+}
+
+.btn-ia:hover,
+.btn-historico:hover {
+  background: white;
+  color: black;
+}
+
+/* =======================================================
+   🪟 MODAL IA
+======================================================= */
 .modal-ia {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -207,6 +207,7 @@ li.concluida {
 
 .modal-content-ia {
   background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   width: 500px;
   max-width: 95%;
   height: 600px;
@@ -214,12 +215,7 @@ li.concluida {
   padding: 20px;
   display: flex;
   flex-direction: column;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  animation: aparecerIA 0.25s ease;
 }
 
 .chat-ia {
@@ -240,8 +236,8 @@ li.concluida {
   background: #2a3140;
   padding: 8px 12px;
   border-radius: 12px;
-  max-width: 80%;
   display: inline-block;
+  max-width: 80%;
 }
 
 .mensagem-ia {
@@ -251,90 +247,100 @@ li.concluida {
   background: #1f2530;
   padding: 8px 12px;
   border-radius: 12px;
-  max-width: 80%;
   display: inline-block;
+  max-width: 80%;
 }
 
-/* ================================
-   FOOTER
-=============================== */
-.footer {
-  margin-top: 60px;
-  padding: 20px 5%;
-  background: var(--bg-secondary);
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+@keyframes aparecerIA {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* ================================
-   MODAL LOGOUT
-=============================== */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-box {
-  background: var(--bg-secondary);
+/* =======================================================
+   📈 GRÁFICOS
+======================================================= */
+#graficoTarefas {
+  margin-top: 25px;
+  background: var(--bg-tertiary);
   padding: 25px;
   border-radius: 12px;
-  width: 320px;
-  text-align: center;
-}
-
-.modal-actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn-secundario {
-  background: #555;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-perigo {
-  background: #e53935;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* ================================
-   GRÁFICOS
-=============================== */
-#graficoTarefas {
-  margin-top: 15px;
-  background: var(--bg-tertiary);
-  padding: 15px;
-  border-radius: 12px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  width: 100%;
+  height: 400px;
 }
 
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
+/* =======================================================
+   FOOTER ANTIGO
+======================================================= */
+.footer {
+    position: relative;
+    margin-top: 100px;
+    padding: 30px 8%;
+    background: #0d1117;
+    border-top: 1px solid #1f2937;
+    overflow: hidden;
+}
 
-  .navbar nav {
-    margin-top: 10px;
+.footer-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    animation: slide 4s linear infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.footer-container {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
-  }
+    gap: 20px;
+}
+
+.footer-left h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.footer-left p {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    color: #6e7681;
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
 }
