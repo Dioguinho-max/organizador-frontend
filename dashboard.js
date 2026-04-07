@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const statConcluidas = document.getElementById("statConcluidas");
     const statMedia = document.getElementById("statMedia");
     const anoAtual = document.getElementById("anoAtual");
+    const avatarInput = document.getElementById("avatarInput");
+    const avatarPreview = document.getElementById("avatarPreview");
+    const profileName = document.getElementById("profileName");
 
     const modalIA = document.getElementById("modalIA");
     const modalHistoricoIA = document.getElementById("modalHistoricoIA");
@@ -76,6 +79,62 @@ document.addEventListener("DOMContentLoaded", () => {
         modalLogout.style.display = "none";
     }
 
+    function obterIniciais(nome) {
+        return (nome || "U")
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map((parte) => parte[0]?.toUpperCase() || "")
+            .join("") || "U";
+    }
+
+    function atualizarAvatar(usuario) {
+        if (profileName) {
+            profileName.textContent = usuario.username || "Seu perfil";
+        }
+
+        if (!avatarPreview) return;
+
+        const iniciais = obterIniciais(usuario.username);
+
+        if (usuario.avatar_url) {
+            avatarPreview.classList.remove("avatar-fallback");
+            avatarPreview.innerHTML = `<img src="${usuario.avatar_url}" alt="Foto de perfil" class="avatar-image">`;
+            return;
+        }
+
+        avatarPreview.classList.add("avatar-fallback");
+        avatarPreview.textContent = iniciais;
+    }
+
+    async function carregarPerfil() {
+        const response = await fetch(`${API}/perfil`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            throw new Error("Não foi possível carregar o perfil");
+        }
+
+        const usuario = await response.json();
+        atualizarAvatar(usuario);
+    }
+
+    async function salvarAvatar(dataUrl) {
+        const response = await fetch(`${API}/perfil`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ avatar_url: dataUrl })
+        });
+
+        if (!response.ok) {
+            throw new Error("Não foi possível salvar a foto de perfil");
+        }
+    }
+
     async function criarTarefa() {
         const titulo = document.getElementById("novaTarefa").value.trim();
         const descricao = document.getElementById("descricaoTarefa").value.trim();
@@ -108,6 +167,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnCriar) {
         btnCriar.addEventListener("click", criarTarefa);
+    }
+
+    if (avatarInput) {
+        avatarInput.addEventListener("change", async (event) => {
+            const arquivo = event.target.files?.[0];
+
+            if (!arquivo) return;
+
+            if (!arquivo.type.startsWith("image/")) {
+                alert("Escolha um arquivo de imagem válido.");
+                avatarInput.value = "";
+                return;
+            }
+
+            if (arquivo.size > 1_500_000) {
+                alert("A imagem deve ter no máximo 1,5 MB.");
+                avatarInput.value = "";
+                return;
+            }
+
+            const leitor = new FileReader();
+
+            leitor.onload = async () => {
+                try {
+                    const dataUrl = leitor.result;
+                    await salvarAvatar(dataUrl);
+                    await carregarPerfil();
+                } catch (erro) {
+                    console.error(erro);
+                    alert("Não foi possível atualizar sua foto de perfil.");
+                } finally {
+                    avatarInput.value = "";
+                }
+            };
+
+            leitor.readAsDataURL(arquivo);
+        });
     }
 
     function renderEmptyState(elemento, mensagem) {
@@ -482,6 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    carregarPerfil().catch((erro) => console.error(erro));
     carregarTarefas();
     carregarRanking();
 });

@@ -60,7 +60,10 @@ body::before {
 .modal-actions,
 .task-meta,
 .task-actions,
-.floating-actions {
+.floating-actions,
+.topbar-actions,
+.profile-chip,
+.profile-copy {
     display: flex;
     align-items: center;
 }
@@ -76,6 +79,10 @@ body::before {
 .topbar {
     gap: 16px;
     margin-bottom: 28px;
+}
+
+.topbar-actions {
+    gap: 14px;
 }
 
 .brand {
@@ -103,6 +110,63 @@ body::before {
     letter-spacing: 0.12em;
     font-size: 0.73rem;
     color: var(--text-soft);
+}
+
+.profile-chip {
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 22px;
+    background: rgba(17, 31, 50, 0.78);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-chip:hover {
+    transform: translateY(-2px);
+    border-color: rgba(89, 195, 195, 0.34);
+}
+
+.profile-copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.profile-copy strong {
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.profile-copy span {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    object-fit: cover;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(124, 154, 196, 0.18);
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatar-fallback {
+    background: linear-gradient(135deg, #17304f, #2f8fb1);
+    color: #f8fbff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.06em;
 }
 
 .topbar h1,
@@ -674,6 +738,16 @@ select:focus {
     .footer-container {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .topbar-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .profile-chip {
+        width: 100%;
     }
 
     .hero h2 {

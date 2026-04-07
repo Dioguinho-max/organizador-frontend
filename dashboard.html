@@ -20,7 +20,17 @@
                     <h1>Painel de evolução</h1>
                 </div>
             </div>
-            <button id="btnSair" class="btn btn-ghost">Sair</button>
+            <div class="topbar-actions">
+                <label class="profile-chip" for="avatarInput">
+                    <div id="avatarPreview" class="avatar avatar-fallback">U</div>
+                    <div class="profile-copy">
+                        <strong id="profileName">Seu perfil</strong>
+                        <span>Trocar foto</span>
+                    </div>
+                </label>
+                <input type="file" id="avatarInput" accept="image/*" hidden>
+                <button id="btnSair" class="btn btn-ghost">Sair</button>
+            </div>
         </header>
 
         <main class="dashboard-layout">
