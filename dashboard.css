@@ -46,9 +46,9 @@ body::before {
 }
 
 .page-shell {
-    width: min(1180px, calc(100% - 32px));
+    width: min(1220px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 28px 0 48px;
+    padding: 28px 0 42px;
     position: relative;
     z-index: 1;
 }
@@ -78,7 +78,7 @@ body::before {
 
 .topbar {
     gap: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 
 .topbar-actions {
@@ -92,8 +92,8 @@ body::before {
 }
 
 .brand-mark {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border-radius: 18px;
     display: grid;
     place-items: center;
@@ -178,18 +178,19 @@ body::before {
 }
 
 .topbar h1 {
-    font-size: clamp(1.6rem, 2vw, 2rem);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    letter-spacing: -0.04em;
 }
 
 .dashboard-layout {
     display: grid;
-    gap: 24px;
+    gap: 18px;
 }
 
 .content-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 24px;
+    gap: 18px;
 }
 
 .card {
@@ -201,12 +202,13 @@ body::before {
 }
 
 .card-hero {
-    padding: 32px;
+    padding: 26px 26px 24px;
     display: grid;
     grid-template-columns: 1.2fr 0.9fr;
-    gap: 24px;
+    gap: 20px;
     overflow: hidden;
     position: relative;
+    min-height: 440px;
 }
 
 .card-hero::after {
@@ -220,21 +222,24 @@ body::before {
 }
 
 .hero h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    max-width: 12ch;
+    font-size: clamp(3rem, 5vw, 4.4rem);
+    max-width: 8ch;
     margin: 10px 0 14px;
+    line-height: 1.02;
+    letter-spacing: -0.06em;
 }
 
 .hero-text {
-    max-width: 60ch;
+    max-width: 44ch;
     color: var(--text-soft);
-    line-height: 1.7;
+    line-height: 1.65;
+    font-size: 1.04rem;
 }
 
 .hero-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 14px;
     align-self: end;
 }
 
@@ -242,8 +247,8 @@ body::before {
     background: linear-gradient(180deg, rgba(15, 31, 52, 0.98), rgba(10, 21, 37, 0.95));
     color: var(--text-light);
     border-radius: 22px;
-    padding: 18px;
-    min-height: 120px;
+    padding: 16px;
+    min-height: 126px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -262,17 +267,17 @@ body::before {
 .tasks-card,
 .ranking-card,
 .chart-card {
-    padding: 28px;
+    padding: 22px;
 }
 
 .tasks-card,
 .chart-card {
-    min-height: 420px;
+    min-height: 380px;
 }
 
 .section-heading {
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 }
 
 .section-badge {
@@ -287,7 +292,7 @@ body::before {
     display: grid;
     grid-template-columns: 1fr 1fr 180px;
     gap: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .field {
@@ -309,9 +314,9 @@ button {
 input,
 select {
     width: 100%;
-    padding: 14px 16px;
+    padding: 15px 16px;
     border-radius: 16px;
-    border: 1px solid transparent;
+    border: 1px solid rgba(124, 154, 196, 0.08);
     background: var(--bg-input);
     color: var(--text-main);
     outline: none;
@@ -384,7 +389,7 @@ select:focus {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 18px;
+    padding: 16px 18px;
     border-radius: 20px;
     background: rgba(13, 24, 40, 0.78);
     border: 1px solid rgba(124, 154, 196, 0.08);
@@ -474,8 +479,8 @@ select:focus {
 }
 
 .chart-shell {
-    height: 320px;
-    padding: 16px;
+    height: 300px;
+    padding: 14px;
     background: rgba(11, 21, 36, 0.76);
     border-radius: 24px;
 }
@@ -655,8 +660,8 @@ select:focus {
 .footer {
     position: relative;
     z-index: 1;
-    margin-top: 40px;
-    padding: 30px 24px 40px;
+    margin-top: 30px;
+    padding: 26px 24px 34px;
 }
 
 .footer-line {
